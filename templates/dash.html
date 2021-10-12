@@ -1,0 +1,44 @@
+{% extends "layouts/layoutMenu.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/style_dash.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="contenedor-dashboard">
+        <div class="dash-bar">
+            <i class='bx bxs-arrow-from-left'></i>
+            <i class='bx bxs-x-circle'></i>
+        </div>
+        <div class="dash-menu">
+            <div class="logo">
+                <p><strong>DASHBOARD</strong></p>
+            </div>
+            <ul class="dash-opc">
+                <p><strong>Publicaciones</strong></p>
+                <li class="dash-item select"><i class="fas fa-edit"></i>Editar post</li>
+                <li class="dash-item"><i class="fas fa-times"></i>Eliminar Post</li>
+                <li class="dash-item"><i class='bx bxs-message-edit' ></i>Editar comentario</li>
+                <li class="dash-item"><i class='bx bxs-message-x' ></i>Eliminar Comentario</li>
+                <p><strong>Permisos, roles y usuarios</strong></p>
+                <li class="dash-item"><i class="fas fa-user-edit"></i>Editar usuario</li>
+                <li class="dash-item"><i class="fas fa-user-times"></i>Eliminar usuario</li>
+                <li class="dash-item"><i class="fas fa-cogs"></i>Asignar permisos</li>
+                <li class="dash-item"><i class="fas fa-user-cog"></i>Asignar roles</li>
+            </ul>
+        </div>
+        <div class="dash-content">
+            <div class="dash-content-item active">content post edt</div>
+            <div class="dash-content-item">content post elm</div>
+            <div class="dash-content-item">content comt edt</div>
+            <div class="dash-content-item">content comt elm</div>
+            <div class="dash-content-item">content user edt</div>
+            <div class="dash-content-item">content user elm</div>
+            <div class="dash-content-item">content asig per</div>
+            <div class="dash-content-item">content asig rol</div>
+        </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "layouts/layoutMenu.html" %}
+
+{% block content %}
+
+<div class="contenedor-layout">
+    <div class="aside-izq-layout">
+        <div class="perfil-usuario">
+            <div class="perfil-contenido">
+                <div class="perfil-foto">
+                    FOTO
+                </div>
+                <div class="perfil-desc">
+                    Descripción
+                </div>
+            </div>
+            <div class="perfil-opciones">
+                <a href="/User/Username">Ir a mi perfil</a>
+            </div>
+        </div>
+    </div>
+    <div class="contenido-layout">
+        {% block content_layout %}
+
+        {% endblock %}
+    </div>
+    <div class="aside-der-layout">
+        <div class="aside">
+            aside derecha
+        </div>
+    </div>
+</div>
+
+{% endblock %}

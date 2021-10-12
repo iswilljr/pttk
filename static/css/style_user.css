@@ -1,0 +1,169 @@
+.contenedor-user{
+    position: absolute;
+    top: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: calc(100% - 55px);
+}
+
+.contenedor-user .vista-perfil{
+    position: absolute;
+    width: 250px;
+    height: 100%;
+    left: 0;
+    background: #fff;
+    border-right: 1px solid var(--color-undefined);
+    box-sizing: border-box;
+    user-select: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.contenedor-user .vista-perfil::-webkit-scrollbar{
+    width: 5px;
+    background: #e9e9e9;
+    border-radius: 130px;
+}
+
+.contenedor-user .vista-perfil::-webkit-scrollbar-thumb{
+    background: var(--color-normal);
+    border-radius: 130px;
+}
+
+.contenedor-user .vista-perfil .perfil{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 250px;
+    border-bottom: 1px solid var(--color-undefined);
+    box-sizing: border-box;
+}
+
+.contenedor-user .vista-perfil .perfil .foto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    margin-top: 10px;
+    border-radius: 50px;
+    background: var(--color-normal);
+}
+
+.contenedor-user .vista-perfil .perfil .user{
+    width: 100%;
+    height: 50px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.contenedor-user .vista-perfil .perfil .desc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100% - 160px);
+}
+
+.contenedor-user .vista-perfil .perfil .desc p{
+    width: 95%;
+    text-align: center;
+    background: var(--color-undefined);
+    margin-bottom: 5px;
+    border-radius: 30px;
+}
+
+.contenedor-user .vista-perfil .perfil .desc div{
+    width: 90%;
+    height: 20px;
+    background: var(--color-undefined);
+    margin-bottom: 5px;
+    border-radius: 30px;
+}
+
+.contenedor-user .vista-perfil .perfil .desc div:last-child{
+    margin-bottom: 0;
+}
+
+.contenedor-user .user-menu{
+    width: 100%;
+    height: calc(100% - 250px);
+}
+
+.contenedor-user .user-menu .item-user{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    padding: 0 8px;
+    box-sizing: border-box;
+}
+
+.contenedor-user .user-menu .item-user:hover{
+    background: var(--background-color);
+}
+
+.contenedor-user .user-menu .item-user.select{
+    background: var(--color-undefined);
+}
+
+.contenedor-user .user-menu .item-user i{
+    width: 25px;
+    color: var(--color-normal);
+    margin-right: 3px;
+    text-align: center;
+}
+
+.contenedor-user .user-menu .item-user.select i{
+    color: var(--color-normal-hover);
+}
+
+.contenedor-user .contenido{
+    position: absolute;
+    width: calc(100% - 250px);
+    height: 100%;
+    right: 0;
+}
+
+.contenedor-user .contenido .content-user{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+}
+
+.contenedor-user .contenido .content-user.active{
+    display: flex;
+}
+
+@media screen and (max-width:650px) {
+    .contenedor-user{
+        flex-direction: column;
+    }
+    .contenedor-user .vista-perfil{
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+    .contenedor-user .contenido{
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 55px);
+    }
+}
+
+@media screen and (max-height:275px) {
+    .contenedor-user .contenido{
+        position: relative;
+        width: 100%;
+        height: 450px;
+    }   
+}

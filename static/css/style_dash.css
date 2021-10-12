@@ -1,0 +1,168 @@
+.contenedor-dashboard{
+    position: absolute;
+    display: flex;
+    top: 55px;
+    width: 100%;
+    height: calc(100% - 55px);
+}
+.contenedor-dashboard .dash-bar{
+    display: none;
+}
+
+.contenedor-dashboard .dash-menu{
+    width: 250px;
+    height: 100%;
+    background: #fff;
+    user-select: none;
+    border-right: 1px solid var(--color-undefined);
+    box-sizing: border-box;
+}
+
+.contenedor-dashboard .dash-menu .logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    background: inherit;
+    font-size: 30px;
+    border-bottom: 1px solid var(--color-undefined);
+    box-sizing: border-box;
+    background: var(--color-normal);
+}
+
+.contenedor-dashboard .dash-menu .dash-opc{
+    list-style: none;
+    width: 100%;
+    height: calc(100% - 70px);
+}
+
+.contenedor-dashboard .dash-menu .dash-opc::-webkit-scrollbar{
+    background: var(--background-color);
+    height: 5px;
+    border-radius: 130px;
+}
+.contenedor-dashboard .dash-menu .dash-opc::-webkit-scrollbar-thumb{
+    background: var(--color-undefined);
+    border-radius: 130px;
+}
+
+.contenedor-dashboard .dash-menu .dash-opc p{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    padding: 0 8px;
+    box-sizing: border-box;
+}
+
+.contenedor-dashboard .dash-menu .dash-opc .dash-item{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    background: inherit;
+    padding: 0 5px;
+    box-sizing: border-box;
+}
+
+.contenedor-dashboard .dash-menu .dash-opc .dash-item:hover{
+    background: var(--background-color);
+}
+
+.contenedor-dashboard .dash-menu .dash-opc .dash-item.select{
+    background: var(--color-undefined);
+}
+
+
+@media screen and (min-width:1400px){
+    .contenedor-dashboard .dash-menu .dash-opc .dash-item{
+        width: 100%;
+        height: 50px;
+    }
+}
+
+.contenedor-dashboard .dash-menu .dash-opc .dash-item i{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-normal);
+    width: 20px;
+    margin-right: 5px;
+}
+
+.contenedor-dashboard .dash-menu .dash-opc .dash-item.select i{
+    color: var(--color-normal-hover);
+}
+
+.contenedor-dashboard .dash-content{
+    width: calc(100% - 250px);
+    height: 100%;
+    background: #fff;
+}
+
+.contenedor-dashboard .dash-content .dash-content-item{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.contenedor-dashboard .dash-content .dash-content-item.active{
+    display: flex;
+}
+
+@media screen and (max-width:750px) {
+    .contenedor-dashboard .dash-menu .logo{
+        height: 50px;
+    }
+    .contenedor-dashboard .dash-menu .dash-opc{
+        height: calc(100% - 60px);
+    }
+}
+@media screen and (max-width:650px) {
+    .contenedor-dashboard{
+        flex-direction: column;
+    }
+    .contenedor-dashboard .dash-menu{
+        min-width: 100%;
+        height: 65px;
+    }
+    .contenedor-dashboard .dash-menu .logo{
+        display: none;
+    }
+    .contenedor-dashboard .dash-menu .dash-opc{
+        display: flex;
+        align-items: center;
+        min-width: inherit;
+        height: inherit;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0 8px;
+        box-sizing: border-box;
+    }
+    .contenedor-dashboard .dash-menu .dash-opc p{
+        display: none;
+    }
+    .contenedor-dashboard .dash-menu .dash-opc .dash-item{
+        align-items: center;
+        justify-content: center;
+        min-width: 155px;
+        height: 45px;
+        border-radius: 20px;
+        background: var(--background-color);
+        margin-right: 5px;
+    }
+    .contenedor-dashboard .dash-menu .dash-opc .dash-item:last-child{
+        margin-right: 0;
+    }
+    .contenedor-dashboard .dash-content{
+        width: 100%;
+        min-height: calc(100% - 65px);
+        background: #ff9;
+    }
+}

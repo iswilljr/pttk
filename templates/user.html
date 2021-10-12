@@ -1,0 +1,46 @@
+{% extends "layouts/layoutMenu.html" %}
+
+{% block title %}{{user}}{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/style_user.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="contenedor-user">
+    <div class="vista-perfil">
+        <div class="perfil">
+            <div class="foto">
+                <p>FOTO</p>
+            </div>
+            <div class="user">{{user}}</div>
+            <div class="desc">
+                <p>Descripción...</p>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <ul class="user-menu" >
+            <li class="item-user select">
+                <p><i class="fas fa-user"></i>Perfil</p>
+            </li>
+            <li class="item-user">
+                <p><i class="fas fa-user-edit"></i>Editar perfil</p>
+            </li>
+            <li class="item-user">
+                <p><i class="fas fa-comment-alt"></i>Ver mensages</p>
+            </li>
+            <li class="item-user">
+                <p><i class="fas fa-portrait"></i>Mis fotos</p>
+            </li>
+        </ul>
+    </div>
+    <div class="contenido">
+        <div class="content-user active">CONTENIDO PERFIL</div>
+        <div class="content-user">CONTENIDO EDITAR PERFIL</div>
+        <div class="content-user">CONTENIDO MENSAJES</div>
+        <div class="content-user">CONTENIDO FOTOS</div>
+    </div>
+</div>
+
+{% endblock %}
