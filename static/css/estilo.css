@@ -1,0 +1,69 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+form h1 {
+    font-family: Arial;
+    font-weight: bold;
+    text-align: center;
+    font-size: 29px;
+
+ }
+ form h3{
+    font-family: sans-serif;
+    font-size: 15px;
+    text-align: center;  
+    width: 50%;
+    color:rgb(70, 68, 68);
+    margin: 10px auto 10px;
+    line-height:20px;
+
+ }
+.registro-container {
+    width: 390px;
+    padding: 30px;
+    border-radius: 20px;
+    margin: auto;
+    margin-top: 150px;
+    background-color:#92D050;
+    box-shadow:7px 13px 37px rgb(148, 148, 148)
+    
+}
+.entradas input {
+    
+    font-family: Arial;
+    width: 80%;
+    margin-bottom:16px;
+    border: none;
+    border-radius: 3px;
+    padding:15px;
+    height: 25px;
+    margin-left:35px;
+ 
+    
+
+  }
+.condiciones {
+    line-height: 25px;
+
+    font-family: sans-serif;
+    font-size: 10px;
+    text-align: center;
+    width: 100%;
+    color:rgb(83, 83, 83);
+}
+.registro button {
+  
+    line-height: 0;
+    margin-top:15px;
+    font-family:'Franklin Gothic Medium';
+    width: 50%;
+    margin-left: 90px;
+    border: none;
+    border-radius: 40px;
+    padding:12px;
+    height: 25px;
+
+
+}
