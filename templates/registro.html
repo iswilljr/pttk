@@ -11,7 +11,8 @@
 
 <body>
   <div class="registro-container">
-    <form action="" method="post" name="formRegistro" onSubmit="validar_formulario();">
+    <form action="" method="POST" name="formRegistro" onSubmit="validar_formulario();">
+      {{ csrf_tokem }}
       <div class="head">
         <h1 name="nombre">Psittacula krameri social</h1>
         <h3>Regístrate para ver tus fotos preferidas</h3>
