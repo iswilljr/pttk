@@ -8,7 +8,7 @@ logged=False
 users=['123']
 passwords=['123']
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET','POST'])
 def Index():
     global logged
     logged=False
@@ -28,7 +28,7 @@ def Login():
         return redirect('/')
     return redirect('/')
 
-@app.route('/SignUp', methods=['GET'])
+@app.route('/SignUp', methods=['GET','POST'])
 def SignUP():
     return render_template('registro.html')
 
@@ -50,7 +50,7 @@ def Home():
         flash("Inicia sesión prueba con 123 y 123, o registrate")
         return redirect('/')
 
-@app.route('/User/<user>', methods=['GET','POST'])
+@app.route('/User/<user>', methods=['GET'])
 def Profile(user):
     if logged:
         return render_template('user.html',user=user)
@@ -58,7 +58,7 @@ def Profile(user):
         flash("Inicia sesión prueba con 123 y 123, o registrate")
         return redirect('/')
 
-@app.route('/Dash', methods=['GET','POST'])
+@app.route('/Dash', methods=['GET'])
 def Dash():
     if logged:
         return render_template('dash.html')
@@ -66,7 +66,7 @@ def Dash():
         flash("Inicia sesión prueba con 123 y 123, o registrate")
         return redirect('/')
 
-@app.route('/Search', methods=['GET','POST'])
+@app.route('/Search', methods=['GET'])
 def Search():
     if logged:
         return render_template('search.html')
