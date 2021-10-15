@@ -1,8 +1,22 @@
+@import url(variables.css);
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+body{
+    background: var(--background-color);
+}
+
+form{
+    width: 390px;
+    background-color:#92D050;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 0 16px 0 rgba(0,0,0,0.423);
+}
+
 form h1 {
     font-family: Arial;
     font-weight: bold;
@@ -21,13 +35,13 @@ form h1 {
 
  }
 .registro-container {
-    width: 390px;
-    padding: 30px;
-    border-radius: 20px;
-    margin: auto;
-    margin-top: 150px;
-    background-color:#92D050;
-    box-shadow:7px 13px 37px rgb(148, 148, 148)
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: none;
     
 }
 .entradas input {
@@ -40,9 +54,6 @@ form h1 {
     padding:15px;
     height: 25px;
     margin-left:35px;
- 
-    
-
   }
 .condiciones {
     line-height: 25px;

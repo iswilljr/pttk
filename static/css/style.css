@@ -21,9 +21,9 @@ body{
 .contenedor-login .login{
     width: 350px;
     height: 350px;
-    background: #fff;
     border-radius: 15px;
-    box-shadow: var(--box-shadow);
+    background: #92D050;
+    box-shadow: 0 0 16px 0 rgb(0,0,0,0.423);
 }
 
 .contenedor-login .login .head{
@@ -50,10 +50,9 @@ body{
     height: 38px;
     margin: 10px auto 10px;
     outline: none;
-    border: none;
-    border-bottom: 1px solid var(--color-normal);
+    border: 1px solid #00000d;
     box-sizing: border-box;
-    background: none;
+    background: #fff;
 }
 
 .contenedor-login .login form input::placeholder{
@@ -61,7 +60,7 @@ body{
 }
 
 .contenedor-login .login form input[type=submit]{
-    border: 1px solid var(--color-normal);
+    border: 1px solid #00000d;
     cursor: pointer;
 }
 
@@ -93,10 +92,8 @@ body{
 }
 
 .contenedor-login .login .foot p a{
-    text-decoration: none;
-    color: var(--color-normal-hover);
+    color: #00000d;
 } 
-
 
 @media screen and (max-width:400px)  {
 

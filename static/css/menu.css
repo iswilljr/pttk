@@ -7,6 +7,7 @@
 body{
     background: var(--background-color);
 }
+
 .navbar{
     position: fixed;
     width: 100%;
@@ -15,6 +16,7 @@ body{
     box-shadow: var(--box-shadow);
     z-index: 9999;
 }
+
 .navbar .navbar-contenedor{
     display: flex;
     justify-content: space-between;
@@ -22,6 +24,7 @@ body{
     width: inherit;
     height: inherit;
 }
+
 .navbar .navbar-contenedor h1{
     display: flex;
     justify-content: center;
@@ -30,10 +33,12 @@ body{
     height: 100%;
     font-size: 20px;
 }
+
 .navbar .navbar-contenedor h1 a{
     text-decoration: none;
     color: #00000d;
 }
+
 .navbar .navbar-contenedor .bx-menu{
     display: none;
     justify-content: center;
@@ -43,6 +48,7 @@ body{
     font-size: 40px;
     cursor: pointer;
 }
+
 .navbar .navbar-contenedor .navbar-menu{
     width: calc(100% - 150px);
     height: 100%;
@@ -58,6 +64,7 @@ body{
     width: 350px;
     height: 100%;
 }
+
 .navbar .navbar-contenedor .navbar-menu form input,
 .navbar .navbar-contenedor .navbar-menu form button{
     outline: none;
@@ -67,14 +74,17 @@ body{
     box-sizing: border-box;
     background: inherit;
 }
+
 .navbar .navbar-contenedor .navbar-menu form input{
     padding: 0 10px;
     width: 280px;
 }
+
 .navbar .navbar-contenedor .navbar-menu form button{
     width: 50px;
     margin-left: 5px;
 }
+
 .navbar .navbar-contenedor .navbar-menu .menu{
     display: flex;
     justify-content: space-evenly;
@@ -84,6 +94,7 @@ body{
     height: 100%;
     font-size: 30px;
 }
+
 .navbar .navbar-contenedor .navbar-menu .menu .item-menu{
     display: flex;
     flex-direction: column;
@@ -91,6 +102,7 @@ body{
     align-items: center;
     height: 100%;
 }
+
 .navbar .navbar-contenedor .navbar-menu .menu .item-menu a{
     display: flex;
     flex-direction: column;
@@ -99,6 +111,7 @@ body{
     color: #00000d;
     text-decoration: none;
 }
+
 .navbar .navbar-contenedor .navbar-menu .menu .item-menu a .item-span{
     position: absolute;
     background: #fff;
@@ -111,14 +124,17 @@ body{
     transform: translateY(200%);
     pointer-events: none;
 }
+
 .navbar .navbar-contenedor .navbar-menu .menu .item-menu a:hover > .item-span{
     opacity: 1;
     transition: all 0.000001s ease;
     transition-delay: 0.9s;
 }
+
 .menu-responsive{
     display: none;
 }
+
 @media screen and (max-width:1000px) {
     
     .navbar .navbar-contenedor .bx-menu{
@@ -293,6 +309,12 @@ body{
     height: 400px;
     background: #fff;
     box-shadow: var(--box-shadow);
+}
+
+.contenedor-layout .aside-der-layout .aside{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media screen and (min-width:1650px) {

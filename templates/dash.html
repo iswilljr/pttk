@@ -3,6 +3,8 @@
 {% block title %} Dashboard {% endblock %}
 
 {% block link %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/style_front.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/style_search.css')}}">
 <link rel="stylesheet" href="{{url_for('static',filename='css/style_dash.css')}}">
 {% endblock %}
 
@@ -30,14 +32,156 @@
             </ul>
         </div>
         <div class="dash-content">
-            <div class="dash-content-item active">content post edt</div>
-            <div class="dash-content-item">content post elm</div>
-            <div class="dash-content-item">content comt edt</div>
-            <div class="dash-content-item">content comt elm</div>
-            <div class="dash-content-item">content user edt</div>
-            <div class="dash-content-item">content user elm</div>
-            <div class="dash-content-item">content asig per</div>
-            <div class="dash-content-item">content asig rol</div>
+            <form action="" method="POST">
+                <input type="text" spellcheck="false" autocomplete="off" placeholder="Ingresa el id del contenido a modificar">
+                <input type="submit" value="Buscar">
+            </form>
+            <div class="dash-content-item active">
+                <div class="post">
+                    <div class="info">
+                        <div class="foto">
+                            <p>Foto</p>
+                        </div>
+                        <div class="desc">
+                            <div class="user-date">
+                                <p><strong>Username</strong></p>
+                                <p>xx/xx/xxxx</p>
+                            </div>
+                            <div class="op-button">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mensaje">
+                        <p class="msg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem eum cupiditate eius illum laborum ipsa fugit facilis dolore sint vero?</p>
+                    </div>
+                    <div class="imagen">
+                        <div class="img-post">IMAGEN</div>
+                    </div>
+                    <div class="comentarios">
+                        <i class="fas fa-comment"></i>
+                        <p><strong>Comentarios (3)</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="dash-content-item">
+                <div class="post">
+                    <div class="info">
+                        <div class="foto">
+                            <p>Foto</p>
+                        </div>
+                        <div class="desc">
+                            <div class="user-date">
+                                <p><strong>Username</strong></p>
+                                <p>xx/xx/xxxx</p>
+                            </div>
+                            <div class="op-button">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mensaje">
+                        <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias veritatis optio
+                            officiis assumenda accusamus unde. Possimus minus, beatae, est dolore, dolorum odit facilis
+                            pariatur illo optio cum animi ea? In. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem alias libero vitae magni autem id ducimus unde obcaecati quam quidem.</p>
+                    </div>
+                    <div class="imagen">
+                        <div class="img-post">IMAGEN</div>
+                    </div>
+                    <div class="comentarios">
+                        <i class="fas fa-comment"></i>
+                        <p><strong>Comentarios (5)</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="dash-content-item">
+                <div class="busqueda" id="comt">
+                    <div class="foto">
+                        <p>Foto</p>
+                    </div>
+                    <div class="s-content" id="cont-busq">
+                        <p id="user"><strong>Username</strong></p>
+                        <div class="desc">
+                            <p id="comt-dash">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, aliquam, consequuntur, cum laborum necessitatibus. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet, sapiente! Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-edit"></i>
+                </div>
+            </div>
+            <div class="dash-content-item">
+                <div class="busqueda" id="comt">
+                    <div class="foto">
+                        <p>Foto</p>
+                    </div>
+                    <div class="s-content" id="cont-busq">
+                        <p id="user"><strong>Username</strong></p>
+                        <div class="desc">
+                            <p id="comt-dash">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi saepe blanditiis quae et, ad quas officiis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum vel amet adipisci officia repellendus quo ducimus, dolorum modi quae vero itaque rem ratione iste provident pariatur animi a eius. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima quas vero quidem quisquam fugiat nostrum nisi voluptate at rem, eius nam quam sapiente delectus dolorum distinctio recusandae molestias. Provident, blanditiis. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos, cum?</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-trash"></i>
+                </div>
+            </div>
+            <div class="dash-content-item">
+                <div class="busqueda">
+                    <div class="foto">
+                        <p>Foto</p>
+                    </div>
+                    <div class="s-content" id="cont-busq">
+                        <p id="user"><strong>Username</strong></p>
+                        <div class="desc">
+                            <p>Descripción</p>
+                            <div></div>
+                        </div>
+                    </div>
+                    <i class="fas fa-edit"></i>
+                </div>
+            </div>
+            <div class="dash-content-item">
+                <div class="busqueda">
+                    <div class="foto">
+                        <p>Foto</p>
+                    </div>
+                    <div class="s-content" id="cont-busq">
+                        <p id="user"><strong>Username</strong></p>
+                        <div class="desc">
+                            <p>Descripción</p>
+                            <div></div>
+                        </div>
+                    </div>
+                    <i class="fas fa-trash"></i>
+                </div>
+            </div>
+            <div class="dash-content-item">
+                <div class="busqueda">
+                    <div class="foto">
+                        <p>Foto</p>
+                    </div>
+                    <div class="s-content" id="cont-busq">
+                        <p id="user"><strong>Username</strong></p>
+                        <div class="desc">
+                            <p>Descripción</p>
+                            <div></div>
+                        </div>
+                    </div>
+                    <i class="fas fa-user-lock"></i>
+                </div>
+            </div>
+            <div class="dash-content-item">
+                <div class="busqueda">
+                    <div class="foto">
+                        <p>Foto</p>
+                    </div>
+                    <div class="s-content" id="cont-busq">
+                        <p id="user"><strong>Username</strong></p>
+                        <div class="desc">
+                            <p>Descripción</p>
+                            <div></div>
+                        </div>
+                    </div>
+                    <i class="fas fa-user-shield"></i>
+                </div>
+            </div>
         </div>
 </div>
 

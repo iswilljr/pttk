@@ -10,6 +10,7 @@
 .post:last-child{
     margin-bottom: 0;
 }
+
 @media screen and (min-width:1400px) {
     .post{
         width: 450px;
@@ -157,4 +158,9 @@
     height: 30px;
     padding: 0 15px;
     box-sizing: border-box;
+}
+
+
+.post .comentarios p{
+    cursor: pointer;
 }
