@@ -24,11 +24,15 @@
                 <li class="dash-item"><i class="fas fa-times"></i>Eliminar Post</li>
                 <li class="dash-item"><i class='bx bxs-message-edit' ></i>Editar comentario</li>
                 <li class="dash-item"><i class='bx bxs-message-x' ></i>Eliminar Comentario</li>
-                <p><strong>Permisos, roles y usuarios</strong></p>
+                {% if rol=='SUPERADMINISTRADOR' or rol=='ADMINISTRADOR' %}
+                <p><strong>Permisos, roles y usuarios</strong></p>        
                 <li class="dash-item"><i class="fas fa-user-edit"></i>Editar usuario</li>
                 <li class="dash-item"><i class="fas fa-user-times"></i>Eliminar usuario</li>
+                {% endif %}
+                {% if rol=='SUPERADMINISTRADOR' %}
                 <li class="dash-item"><i class="fas fa-cogs"></i>Asignar permisos</li>
                 <li class="dash-item"><i class="fas fa-user-cog"></i>Asignar roles</li>
+                {% endif %}
             </ul>
         </div>
         <div class="dash-content">
@@ -122,6 +126,7 @@
                     <i class="fas fa-trash"></i>
                 </div>
             </div>
+            {% if rol=='SUPERADMINISTRADOR' or rol=='ADMINISTRADOR' %}
             <div class="dash-content-item">
                 <div class="busqueda">
                     <div class="foto">
@@ -152,6 +157,8 @@
                     <i class="fas fa-trash"></i>
                 </div>
             </div>
+            {% endif %}
+            {% if rol=='SUPERADMINISTRADOR' %}
             <div class="dash-content-item">
                 <div class="busqueda">
                     <div class="foto">
@@ -182,6 +189,7 @@
                     <i class="fas fa-user-shield"></i>
                 </div>
             </div>
+            {% endif %}
         </div>
 </div>
 

@@ -13,7 +13,7 @@
             <div class="foto">
                 <p>FOTO</p>
             </div>
-            <div class="user">{{user}}</div>
+            <div class="user">{{username}}</div>
             <div class="desc">
                 <p>Descripción...</p>
                 <div></div>
@@ -24,19 +24,29 @@
             <li class="item-user select">
                 <p><i class="fas fa-user"></i>Perfil</p>
             </li>
+            {% if username==user %}
             <li class="item-user">
                 <p><i class="fas fa-user-edit"></i>Editar perfil</p>
             </li>
             <li class="item-user">
                 <p><i class="fas fa-comment-alt"></i>Ver mensajes</p>
             </li>
+            {% endif %}
             <li class="item-user">
-                <p><i class="fas fa-portrait"></i>Mis fotos</p>
+                <p>
+                    <i class="fas fa-portrait"></i>
+                    {% if username==user %}
+                        Mis fotos
+                    {% else %}
+                        Fotos
+                    {% endif %}
+            </p>
             </li>
         </ul>
     </div>
     <div class="contenido">
         <div class="content-user active">CONTENIDO PERFIL</div>
+        {% if username==user %}
         <div class="content-user">
             <div class="foto-user">FOTO<i class="fas fa-pen"></i></div>
             <div class="desc-user">
@@ -88,8 +98,8 @@
                     </div>
                 </div>
             </div>
-            
         </div>
+        {% endif %}
         <div class="content-user">
             <ul class="user-galery">
                 <li class="user-galery-foto">FOTO</li>

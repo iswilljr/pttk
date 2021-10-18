@@ -21,9 +21,9 @@ body{
 .contenedor-login .login{
     width: 350px;
     height: 350px;
+    background: #fff;
     border-radius: 15px;
-    background: #92D050;
-    box-shadow: 0 0 16px 0 rgb(0,0,0,0.423);
+    box-shadow: var(--box-shadow);
 }
 
 .contenedor-login .login .head{
@@ -50,9 +50,10 @@ body{
     height: 38px;
     margin: 10px auto 10px;
     outline: none;
-    border: 1px solid #00000d;
+    border: none;
+    border-bottom: 1px solid var(--color-normal);
     box-sizing: border-box;
-    background: #fff;
+    background: none;
 }
 
 .contenedor-login .login form input::placeholder{
@@ -60,7 +61,7 @@ body{
 }
 
 .contenedor-login .login form input[type=submit]{
-    border: 1px solid #00000d;
+    border: 1px solid var(--color-normal);
     cursor: pointer;
 }
 
@@ -92,20 +93,128 @@ body{
 }
 
 .contenedor-login .login .foot p a{
-    color: #00000d;
+    text-decoration: none;
+    color: var(--color-normal-hover);
 } 
+
+
+.contenedor-sign{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.contenedor-sign .sign{
+    width: 350px;
+    height: 450px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+}
+
+.contenedor-sign .sign .head{
+    position: relative;
+    display: block;
+    margin: 22px auto;
+    text-align: center;
+    font-size: 28px;
+}
+
+.contenedor-sign .sign form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 232px;
+}
+
+.contenedor-sign .sign form input{
+    display: block;
+    padding: 10px;
+    width: 85%;
+    height: 38px;
+    margin: 10px auto 10px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--color-normal);
+    box-sizing: border-box;
+    background: none;
+}
+
+.contenedor-sign .sign form input::placeholder{
+    color: #000;
+}
+
+.contenedor-sign .sign form input[type=submit]{
+    border: 1px solid var(--color-normal);
+    cursor: pointer;
+}
+
+.contenedor-sign .sign .foot{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    width: 100%;
+    height: 107px;
+}
+.contenedor-sign .sign .foot .flash{
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: #ff0000;
+}
+
+.contenedor-sign .sign .foot p{
+    width: 100%;
+    height: 40px;
+    align-self: flex-end;
+    padding: 0 25px;
+    box-sizing: border-box;
+}
+
+.contenedor-sign .sign .foot #term{
+    align-self: flex-start;
+    cursor: pointer;
+}
+ 
+.contenedor-sign .sign .foot p a{
+    text-decoration: none;
+    color: var(--color-normal-hover);
+}
+
 
 @media screen and (max-width:400px)  {
 
     .contenedor-login .login{
         height: 400px;
     }
+    .contenedor-sign .sign{
+        height: 500px;
+    }
+    .contenedor-sign .sign .head,
     .contenedor-login .login .head{
         height: 100px;
         box-sizing: border-box;
     }
+    .contenedor-sign .sign .head p,
     .contenedor-login .login .head p{
         margin-top: 10px;
+    }
+    .contenedor-sign .sign .foot{
+        align-items: center;
+        height: 124px;
+    }
+    .contenedor-sign .sign .foot p{
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 
@@ -113,11 +222,25 @@ body{
     .contenedor-login .login{
         height: 400px;
     }
+    .contenedor-sign .sign{
+        height: 500px;
+    }
+    .contenedor-sign .sign .head,
     .contenedor-login .login .head{
         height: 100px;
         box-sizing: border-box;
     }
+    .contenedor-sign .sign .head p,
     .contenedor-login .login .head p{
         margin-top: 10px;
+    }
+    .contenedor-sign .sign .foot{
+        align-items: center;
+        height: 124px;
+    }
+    .contenedor-sign .sign .foot p{
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

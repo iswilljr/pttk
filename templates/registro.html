@@ -1,50 +1,39 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registro</title>
-  <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Registrate!</title>
 </head>
-
 <body>
-  <div class="registro-container">
-    <form action="/Sign" method="post" name="formRegistro" onSubmit="validar_formulario();">
-      {{ csrf_tokem }}
-      <div class="head">
-        <h1 name="nombre">Psittacula krameri social</h1>
-        <h3>Regístrate para ver tus fotos preferidas</h3>
-      </div>
-      <div class="entradas">
-
-        <label for="email"></label>
-        <input type="text" id="email" name="email" maxlength="100" placeholder="Email"><br>
-
-        <label for="user"></label>
-        <input type="text" id="user" name="user" placeholder="Usuario"><br>
-
-        <label for="password"></label>
-        <input type="password" id="password" name="password" placeholder="Contraseña">
-
-      </div>
-      <div>
-        <footer class="condiciones">
-          <input type="checkbox" name="condiciones"> Declaro haber leido y
-          acepto las condiciones generales del programa y la normativa sobre
-          protección de datos
-      </div>
-      <div class="registro" >
-        <button type="submit" value="Registrar" >Registrarse</button>
-      </div>
-    </form>
-
-  </div>
-  <script
-    src="{{url_for('static',filename='validacion.js')}}"></script>
-
-
+    <div class="contenedor-sign">
+        <div class="sign">
+            <div class="head">
+                <h1>Social Psittacula Krameri</h1>
+                <p>¡Registrate!</p>
+            </div>
+            <form action="/Sign" method="POST">
+                <input type="email" placeholder="Email" name="email" id="email" required>
+                <input type="text" placeholder="Usuario" name="user" id="user" required>
+                <input type="password" placeholder="Contraseña" name="pass" id="pass" required>
+                <input type="submit" value="Registrar">
+            </form>
+            <div class="foot">
+                <div class="flash">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                                {% for msg in messages %}
+                                    {{ msg }}
+                                {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <p id="term">Al registrarte, aceptas nuestras Condiciones, la Política de datos y la Política de cookies.</p>
+                <p>¿Ya tienes cuenta? <a href="/">Entrar</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="{{url_for('static',filename='js/script.js')}}"></script>
 </body>
-
 </html>
