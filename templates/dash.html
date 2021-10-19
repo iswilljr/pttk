@@ -25,7 +25,16 @@
                 <li class="dash-item"><i class='bx bxs-message-edit' ></i>Editar comentario</li>
                 <li class="dash-item"><i class='bx bxs-message-x' ></i>Eliminar Comentario</li>
                 {% if rol=='SUPERADMINISTRADOR' or rol=='ADMINISTRADOR' %}
-                <p><strong>Permisos, roles y usuarios</strong></p>        
+                <p>
+                    <strong>
+                        {% if rol=='ADMINISTRADOR' %}
+                            Usuarios
+                        {% elif rol=='SUPERADMINISTRADOR' %}
+                            Permisos, roles y usuarios
+                        {% endif %}
+                        
+                    </strong>
+                </p>        
                 <li class="dash-item"><i class="fas fa-user-edit"></i>Editar usuario</li>
                 <li class="dash-item"><i class="fas fa-user-times"></i>Eliminar usuario</li>
                 {% endif %}
@@ -36,8 +45,8 @@
             </ul>
         </div>
         <div class="dash-content">
-            <form action="" method="POST">
-                <input type="text" spellcheck="false" autocomplete="off" placeholder="Ingresa el id del contenido a modificar">
+            <form action="">
+                <input type="search" spellcheck="false" autocomplete="off" placeholder="Ingresa el id del contenido a modificar">
                 <input type="submit" value="Buscar">
             </form>
             <div class="dash-content-item active">

@@ -9,11 +9,12 @@ app.secret_key=os.urandom(24)
 
 @app.route('/', methods=['GET','POST'])
 def Index():
+    if 'user' in session:
+        return redirect('/Inicio')
     return render_template('index.html')
 
 @app.route('/Login', methods=['GET','POST'])
 def Login():
-    global user, rol
     if request.method == 'POST':
         user=escape(request.form['user'])
         pw=escape(request.form['pass'])
@@ -23,15 +24,16 @@ def Login():
                 data=cur.execute("SELECT clave, rol FROM Sesiones WHERE username = ?",[user]).fetchone()
                 if not data is None:
                     pw_hash=data[0]
-                    rol=data[1]
+                    rol_user=data[1]
                     if check_password_hash(pw_hash,pw):
                         session['user']=user
+                        session['rol']=rol_user
                         return redirect('/Inicio')
                     else:
                         flash('Contraseña incorrecta')
                 else:
                     flash('Usuario invalido')
-                return redirect('/')                
+                return redirect('/')
         except Error:
             print(Error)
     return redirect('/')
@@ -74,29 +76,28 @@ def Sign():
 @app.route('/Inicio', methods=['GET'])
 def Home():
     if 'user' in session:
-        return render_template('front.html',user=user,rol=rol)
+        return render_template('front.html',user=session['user'],rol=session['rol'])
     else:
         return redirect('/')
 
 @app.route('/User/<username>', methods=['GET'])
 def Profile(username):
     if 'user' in session:
-        print(username,user)
-        return render_template('user.html',username=username,user=user,rol=rol)
+        return render_template('user.html',username=username,user=session['user'],rol=session['rol'])
     else:
         return redirect('/')
 
 @app.route('/Dash', methods=['GET'])
 def Dash():
     if 'user' in session:
-        return render_template('dash.html',user=user,rol=rol)
+        return render_template('dash.html',user=session['user'],rol=session['rol'])
     else:
         return redirect('/')
 
 @app.route('/Search', methods=['GET'])
 def Search():
     if 'user' in session:
-        return render_template('search.html',user=user,rol=rol)
+        return render_template('search.html',user=session['user'],rol=session['rol'])
     else:
         return redirect('/')
 
@@ -107,4 +108,4 @@ def Logout():
     return redirect('/')
 
 if __name__=='__main__':
-    app.run(debug=True,host='0.0.0.0')
+    app.run( host='127.0.0.1', port=443, ssl_context=('micertificado.pem', 'llaveprivada.pem'), debug=True)

@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="{{url_for('static',filename='img/logo_pttk.png')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Registrate!</title>
@@ -15,8 +16,8 @@
             </div>
             <form action="/Sign" method="POST">
                 <input type="email" placeholder="Email" name="email" id="email" required>
-                <input type="text" placeholder="Usuario" name="user" id="user" required>
-                <input type="password" placeholder="Contraseña" name="pass" id="pass" required>
+                <input type="text" placeholder="Usuario" name="user" id="user" minlength="8" maxlength="15"  required>
+                <input type="password" placeholder="Contraseña" name="pass" id="pass" minlength="8" required>
                 <input type="submit" value="Registrar">
             </form>
             <div class="foot">
@@ -34,6 +35,5 @@
             </div>
         </div>
     </div>
-    <script src="{{url_for('static',filename='js/script.js')}}"></script>
 </body>
 </html>
