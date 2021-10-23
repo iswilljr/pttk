@@ -1,0 +1,133 @@
+{% extends "dash.html" %}
+
+{% block postEdit %}
+{% if dataUser=='None' %}
+<div class="dash-content-item active">
+    Usuario no encontrado
+</div>
+{% else %}
+<div class="dash-content-item active">
+    {% if dataPost!='None' %}
+    {% for post in dataPost %}
+    <div class="post">
+        <div class="info">
+            <div class="foto">
+                <p>Foto</p>
+            </div>
+            <div class="desc">
+                <div class="user-date">
+                    <p><strong>{{post[1]}}</strong></p>
+                    <p>{{post[2]}}</p>
+                </div>
+                {% if rol!="USUARIO" or user==post[1] %}
+                <div class="op-button">
+                    <i class="fas fa-ellipsis-h"></i>
+                    <div class="op-menu">
+                        <p><a href="/Post/Edit/{{post[1]}}/{{post[0]}}">Editar publicación</a></p>
+                        <p><a href="/Post/Delete/{{post[1]}}/{{post[0]}}">Eliminar publicación</a></p>
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+        <div class="mensaje">
+            <p class="msg">
+                {% set mensage = post[3].split('\n') %}
+                {% for msg in mensage %}
+                {{msg}}<br>
+                {% endfor %}
+            </p>
+        </div>
+        {% if post[4]!='None' %}
+        <div class="imagen">
+            <div class="img-post"><img src="/{{post[4]}}" alt=""></div>
+        </div>
+        {% endif %}
+
+        <div class="comentarios">
+            <i class="fas fa-comment"></i>
+            <p><strong>Comentarios (0)</strong></p>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    Usuario sin contenido aún
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block comtEdit %}
+{% if dataUser=='None' %}
+<div class="dash-content-item">
+    Usuario no encontrado
+</div>
+{% else %}
+<div class="dash-content-item">
+    Sin contenido aún.
+</div>
+{% endif %}
+{% endblock %}
+
+{% block userEdit %}
+<div class="dash-content-item">
+    {% if dataUser!='None' %}
+    <div class="busqueda">
+        <div class="foto">
+            <p>Foto</p>
+        </div>
+        <div class="s-content" id="cont-busq">
+            <p id="user"><strong>{{dataUser[0]}}</strong></p>
+            <div class="desc">
+                <p>{{dataUser[1]}}</p>
+                <div></div>
+            </div>
+        </div>
+        <i class="fas fa-edit button-user-dash"></i>
+        <div class="opciones-dash">
+            <div><a href="/User/{{dataUser[0]}}">Editar usuario</a></div>
+            <div><a href="/User/{{dataUser[0]}}/Delete">Eliminar usuario</a></div>
+        </div>
+    </div>
+    {% else %}
+    Usuario no encontrado
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block asigEdit %}
+<div class="dash-content-item">
+    {% if dataUser!='None' %}
+    <div class="busqueda">
+        <div class="foto">
+            <p>Foto</p>
+        </div>
+        <div class="s-content" id="cont-busq">
+            <p id="user"><strong>{{dataUser[0]}}</strong></p>
+            <div class="desc">
+                <p>{{dataUser[1]}}</p>
+                <div></div>
+            </div>
+        </div>
+        <i class="fas fa-user-shield button-user-dash"></i>
+        <div class="opciones-dash">
+            <form action="" method="POST" id="formRol">
+                <input type="text" name="user" id="user" style="display: none;" value="{{dataUser[0]}}">
+                {% if dataUser[2]!='USUARIO' %}
+                <button class="button-form-rol" value="USUARIO" onclick="user()">Cambiar rol a usuario</button> 
+                {% endif %}
+                {% if dataUser[2]!='ADMINISTRADOR' %}
+                <button class="button-form-rol" value="ADMINISTRADOR" onclick="admin()">Cambiar rol a administrador</button> 
+                {% endif %}
+                {% if dataUser[2]!='SUPERADMINISTRADOR' %}
+                <button class="button-form-rol" value="SUPERADMINISTRADOR" onclick="superadmin()">Cambiar rol a superadmin</button> 
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    {% else %}
+    Usuario no encontrado
+    {% endif %}
+</div>
+{% endblock %}

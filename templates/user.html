@@ -15,57 +15,100 @@
             </div>
             <div class="user">{{username}}</div>
             <div class="desc">
-                <p>Descripción...</p>
-                <div></div>
-                <div></div>
+                <p>{{dataUser['descripcion']}}</p>
             </div>
         </div>
-        <ul class="user-menu" >
+        <ul class="user-menu">
             <li class="item-user select">
-                <p><i class="fas fa-user"></i>Perfil</p>
+                <p><i class="fas fa-user-edit"></i>Perfil</p>
             </li>
             {% if username==user %}
-            <li class="item-user">
-                <p><i class="fas fa-user-edit"></i>Editar perfil</p>
-            </li>
+
             <li class="item-user">
                 <p><i class="fas fa-comment-alt"></i>Ver mensajes</p>
             </li>
             {% endif %}
-            <li class="item-user">
+            <li class="item-user fotos">
                 <p>
                     <i class="fas fa-portrait"></i>
                     {% if username==user %}
-                        Mis fotos
+                    Mis fotos
                     {% else %}
-                        Fotos
+                    Fotos
                     {% endif %}
-            </p>
+                </p>
             </li>
         </ul>
     </div>
     <div class="contenido">
-        <div class="content-user active">CONTENIDO PERFIL</div>
-        {% if username==user %}
-        <div class="content-user">
-            <div class="foto-user">FOTO<i class="fas fa-pen"></i></div>
+        <form class="content-user active" action="/User/{{user}}/Edit" method="POST" onsubmit="habilitar()">
+            <div class="foto-user">
+                FOTO
+                {% if username==user %}
+                <i class="fas fa-pen"></i>
+                {% endif %}
+            </div>
             <div class="desc-user">
-                <div>Descripción <i class="fas fa-pen"></i></div>
-                <div></div>
+                <div>
+                    <input type="text" name="desc" id="desc" class="input-edit-cont" value="{{dataUser['descripcion']}}" disabled>
+                    {% if username==user or rol!='USUARIO' %}
+                    <i class="fas fa-pen edit-cont"></i>
+                    {% endif %}
+                </div>
             </div>
             <div class="info-user">
                 <div>
-                    <p><strong>Username: </strong>xxxxxxxxx <i class="fas fa-pen"></i></p>
-                    <p><strong>País: </strong>xxxxxxxxx <i class="fas fa-pen"></i></p>
-                    <p><strong>Ciudad: </strong>xxxxxxxxx <i class="fas fa-pen"></i></p>
+                    <strong>Username: </strong>
+                    <div>
+                        <input type="text" name="user" id="user" class="input-edit-cont" value="{{dataUser['username']}}" disabled>
+                        {% if username==user or rol!='USUARIO' %}
+                        <i class="fas fa-pen edit-cont"></i>
+                        {% endif %}
+                    </div>
                 </div>
                 <div>
-                    <p><strong>Teléfono: </strong>xxxxxxx <i class="fas fa-pen"></i></p>
-                    <p><strong>Correo: </strong>xxxxxxx <i class="fas fa-pen"></i></p>
-                    <p><strong>Contraseña: </strong>xxxxxxx <i class="fas fa-pen"></i></p>
+                    <strong>País: </strong>
+                    <div>
+                        <input type="text" name="pais" id="pais" class="input-edit-cont" value="{{dataUser['pais']}}" disabled>
+                        {% if username==user or rol!='USUARIO' %}
+                        <i class="fas fa-pen edit-cont"></i>
+                        {% endif %}
+                    </div>
                 </div>
+                <div>
+                    <strong>Ciudad: </strong>
+                    <div>
+                        <input type="text" name="ciud" id="ciud" class="input-edit-cont" value="{{dataUser['ciudad']}}" disabled>
+                        {% if username==user or rol!='USUARIO' %}
+                        <i class="fas fa-pen edit-cont"></i>
+                        {% endif %}
+                    </div>
+                </div>
+                <div>
+                    <strong>Teléfono: </strong>
+                    <div>
+                        <input type="number" name="tel" id="tel" class="input-edit-cont" value="{{dataUser['telefono']}}" disabled>
+                        {% if username==user or rol!='USUARIO' %}
+                        <i class="fas fa-pen edit-cont"></i>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if username==user or rol!='USUARIO' %}
+                <div>
+                    <strong id="email-str">Correo: </strong>
+                    <div id="email-div">
+                        <input type="text" name="email" id="email" class="input-edit-cont" value="{{dataUser['email']}}" disabled>
+                        <i class="fas fa-pen edit-cont"></i>
+                    </div>
+                </div>
+                {% endif %}
             </div>
-        </div>
+            {% if username==user or rol!='USUARIO' %}
+            <button class="button-edit"><i class="fas fa-check-circle"></i></button>
+            {% endif %}
+        </form>
+        {% if username==user %}
+
         <div class="content-user">
             <div class="chats">
                 <div class="user-chats">
@@ -102,21 +145,19 @@
         {% endif %}
         <div class="content-user">
             <ul class="user-galery">
-                <li class="user-galery-foto">FOTO</li>
-                <li class="user-galery-foto">FOTO</li>
-                <li class="user-galery-foto">FOTO</li>
-                <li class="user-galery-foto">FOTO</li>
-                <li class="user-galery-foto">FOTO</li>
-                <li class="user-galery-foto">FOTO</li>
-                <li class="user-galery-foto">FOTO</li>
-                <li class="user-galery-foto">FOTO</li>
-                <li class="user-galery-foto">FOTO</li>
-                <li class="user-galery-foto">FOTO</li>
-                <li class="user-galery-foto">FOTO</li>
-                <li class="user-galery-foto">FOTO</li>
-                <li class="user-galery-foto">FOTO</li>
-                <li class="user-galery-foto">FOTO</li>
-                <li class="user-galery-foto">FOTO</li>
+                {% set cantFotos = 0 %}
+                {% for img in dataFotos %}
+                    {% if img[0]!='None' %}
+                        <li class="user-galery-foto">
+                            <img src="/{{img[0]}}">
+                        </li>
+                    {% else %}
+                    {% set cantFotos = cantFotos + 1 %}
+                    {% endif %}
+                {% endfor %}
+                {% if cantFotos==dataFotoslen %}
+                ESTE USUARIO NO TIENE FOTOS
+                {% endif %}
             </ul>
         </div>
     </div>

@@ -16,14 +16,12 @@
         </div>
         <div class="dash-menu">
             <div class="logo">
-                <p><strong>DASHBOARD</strong></p>
+                <a href="/Dash"><strong>DASHBOARD</strong></a>
             </div>
             <ul class="dash-opc">
                 <p><strong>Publicaciones</strong></p>
-                <li class="dash-item select"><i class="fas fa-edit"></i>Editar post</li>
-                <li class="dash-item"><i class="fas fa-times"></i>Eliminar Post</li>
-                <li class="dash-item"><i class='bx bxs-message-edit' ></i>Editar comentario</li>
-                <li class="dash-item"><i class='bx bxs-message-x' ></i>Eliminar Comentario</li>
+                <li class="dash-item select"><i class="fas fa-edit"></i>Posts</li>
+                <li class="dash-item"><i class='bx bxs-message-edit' ></i>Comentarios</li>
                 {% if rol=='SUPERADMINISTRADOR' or rol=='ADMINISTRADOR' %}
                 <p>
                     <strong>
@@ -35,169 +33,104 @@
                         
                     </strong>
                 </p>        
-                <li class="dash-item"><i class="fas fa-user-edit"></i>Editar usuario</li>
-                <li class="dash-item"><i class="fas fa-user-times"></i>Eliminar usuario</li>
+                <li class="dash-item"><i class="fas fa-user-edit"></i>Usuario</li>
                 {% endif %}
                 {% if rol=='SUPERADMINISTRADOR' %}
-                <li class="dash-item"><i class="fas fa-cogs"></i>Asignar permisos</li>
                 <li class="dash-item"><i class="fas fa-user-cog"></i>Asignar roles</li>
                 {% endif %}
             </ul>
         </div>
+        
         <div class="dash-content">
-            <form action="">
-                <input type="search" spellcheck="false" autocomplete="off" placeholder="Ingresa el id del contenido a modificar">
-                <input type="submit" value="Buscar">
+            {% if rol!='USUARIO' %}
+            <form action="" method="POST" id="dashConsulta" onsubmit="actionSelect()">
+                <select class="select-dash" name="" id="" style="display: none;">
+                    <option class="option-dash" value="post" selected="selected">post</option>
+                    <option class="option-dash" value="comt">comt</option>
+                    {% if rol!='USUARIO' %}
+                    <option class="option-dash" value="user">user</option>
+                    {% endif %}
+                    {% if rol=='SUPERADMINISTRADOR' %}
+                    <option class="option-dash" value="asig">asig</option>
+                    {% endif %}
+                </select>
+                <input type="search" name="consulta" id="consulta" spellcheck="false" autocomplete="off" placeholder="Ingresa el id del contenido a modificar">
+                <input type="submit" value="Buscar" id="buttonDashSelect">
             </form>
-            <div class="dash-content-item active">
-                <div class="post">
-                    <div class="info">
-                        <div class="foto">
-                            <p>Foto</p>
-                        </div>
-                        <div class="desc">
-                            <div class="user-date">
-                                <p><strong>Username</strong></p>
-                                <p>xx/xx/xxxx</p>
-                            </div>
-                            <div class="op-button">
-                                <i class="fas fa-edit"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mensaje">
-                        <p class="msg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem eum cupiditate eius illum laborum ipsa fugit facilis dolore sint vero?</p>
-                    </div>
-                    <div class="imagen">
-                        <div class="img-post">IMAGEN</div>
-                    </div>
-                    <div class="comentarios">
-                        <i class="fas fa-comment"></i>
-                        <p><strong>Comentarios (3)</strong></p>
-                    </div>
-                </div>
-            </div>
-            <div class="dash-content-item">
-                <div class="post">
-                    <div class="info">
-                        <div class="foto">
-                            <p>Foto</p>
-                        </div>
-                        <div class="desc">
-                            <div class="user-date">
-                                <p><strong>Username</strong></p>
-                                <p>xx/xx/xxxx</p>
-                            </div>
-                            <div class="op-button">
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mensaje">
-                        <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias veritatis optio
-                            officiis assumenda accusamus unde. Possimus minus, beatae, est dolore, dolorum odit facilis
-                            pariatur illo optio cum animi ea? In. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem alias libero vitae magni autem id ducimus unde obcaecati quam quidem.</p>
-                    </div>
-                    <div class="imagen">
-                        <div class="img-post">IMAGEN</div>
-                    </div>
-                    <div class="comentarios">
-                        <i class="fas fa-comment"></i>
-                        <p><strong>Comentarios (5)</strong></p>
-                    </div>
-                </div>
-            </div>
-            <div class="dash-content-item">
-                <div class="busqueda" id="comt">
-                    <div class="foto">
-                        <p>Foto</p>
-                    </div>
-                    <div class="s-content" id="cont-busq">
-                        <p id="user"><strong>Username</strong></p>
-                        <div class="desc">
-                            <p id="comt-dash">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, aliquam, consequuntur, cum laborum necessitatibus. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet, sapiente! Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-edit"></i>
-                </div>
-            </div>
-            <div class="dash-content-item">
-                <div class="busqueda" id="comt">
-                    <div class="foto">
-                        <p>Foto</p>
-                    </div>
-                    <div class="s-content" id="cont-busq">
-                        <p id="user"><strong>Username</strong></p>
-                        <div class="desc">
-                            <p id="comt-dash">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi saepe blanditiis quae et, ad quas officiis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsum vel amet adipisci officia repellendus quo ducimus, dolorum modi quae vero itaque rem ratione iste provident pariatur animi a eius. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima quas vero quidem quisquam fugiat nostrum nisi voluptate at rem, eius nam quam sapiente delectus dolorum distinctio recusandae molestias. Provident, blanditiis. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos, cum?</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-trash"></i>
-                </div>
-            </div>
-            {% if rol=='SUPERADMINISTRADOR' or rol=='ADMINISTRADOR' %}
-            <div class="dash-content-item">
-                <div class="busqueda">
-                    <div class="foto">
-                        <p>Foto</p>
-                    </div>
-                    <div class="s-content" id="cont-busq">
-                        <p id="user"><strong>Username</strong></p>
-                        <div class="desc">
-                            <p>Descripción</p>
-                            <div></div>
-                        </div>
-                    </div>
-                    <i class="fas fa-edit"></i>
-                </div>
-            </div>
-            <div class="dash-content-item">
-                <div class="busqueda">
-                    <div class="foto">
-                        <p>Foto</p>
-                    </div>
-                    <div class="s-content" id="cont-busq">
-                        <p id="user"><strong>Username</strong></p>
-                        <div class="desc">
-                            <p>Descripción</p>
-                            <div></div>
-                        </div>
-                    </div>
-                    <i class="fas fa-trash"></i>
-                </div>
-            </div>
             {% endif %}
+
+            {% block postEdit %}
+            <div class="dash-content-item active">
+                {% if dataPost!='None' %}
+                {% for post in dataPost %}
+                <div class="post">
+                    <div class="info">
+                        <div class="foto">
+                            <p>Foto</p>
+                        </div>
+                        <div class="desc">
+                            <div class="user-date">
+                                <p><strong>{{post[1]}}</strong></p>
+                                <p>{{post[2]}}</p>
+                            </div>
+                            {% if rol!="USUARIO" or user==post[1] %}
+                            <div class="op-button">
+                                <i class="fas fa-ellipsis-h"></i>
+                                <div class="op-menu">
+                                    <p><a href="/Post/Edit/{{post[1]}}/{{post[0]}}">Editar publicación</a></p>
+                                    <p><a href="/Post/Delete/{{post[1]}}/{{post[0]}}">Eliminar publicación</a></p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            
+                        </div>
+                    </div>
+                    <div class="mensaje">
+                        <p class="msg">
+                            {% set mensage = post[3].split('\n') %}
+                            {% for msg in mensage %}
+                                {{msg}}<br>
+                            {% endfor %}
+                        </p>
+                    </div>
+                    {% if post[4]!='None' %}
+                        <div class="imagen">
+                            <div class="img-post"><img src="/{{post[4]}}" alt=""></div>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="comentarios">
+                        <i class="fas fa-comment"></i>
+                        <p><strong>Comentarios (0)</strong></p>
+                    </div>
+                </div>              
+                {% endfor %}
+                {% else %}
+                Sin posts aún.
+                {% endif %}
+            </div>
+            {% endblock  %}
+
+            {% block comtEdit %}
+            <div class="dash-content-item">
+                Sin comentarios aún.
+            </div>
+            {% endblock  %}
+            
+            {% if rol!='USUARIO' %}
+            {% block userEdit %}
+            <div class="dash-content-item">
+                Sin contenido aún, ingresa un Username para poder editarlo
+            </div>
+            {% endblock  %}
+            {% endif %}
+
             {% if rol=='SUPERADMINISTRADOR' %}
+            {% block asigEdit %}
             <div class="dash-content-item">
-                <div class="busqueda">
-                    <div class="foto">
-                        <p>Foto</p>
-                    </div>
-                    <div class="s-content" id="cont-busq">
-                        <p id="user"><strong>Username</strong></p>
-                        <div class="desc">
-                            <p>Descripción</p>
-                            <div></div>
-                        </div>
-                    </div>
-                    <i class="fas fa-user-lock"></i>
-                </div>
+                Sin contenido aún, ingresa un Username para modificarlo
             </div>
-            <div class="dash-content-item">
-                <div class="busqueda">
-                    <div class="foto">
-                        <p>Foto</p>
-                    </div>
-                    <div class="s-content" id="cont-busq">
-                        <p id="user"><strong>Username</strong></p>
-                        <div class="desc">
-                            <p>Descripción</p>
-                            <div></div>
-                        </div>
-                    </div>
-                    <i class="fas fa-user-shield"></i>
-                </div>
-            </div>
+            {% endblock  %}
             {% endif %}
         </div>
 </div>

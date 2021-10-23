@@ -1,0 +1,39 @@
+{% extends "layouts/layoutFront.html" %}
+
+{% block title %} Editar Post {% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/style_front.css')}} ">
+{% endblock %}
+
+{% block content_layout %}
+
+<form action="/Post/Edit/{{data[1]}}/{{data[0]}}" method="POST" enctype="multipart/form-data" class="cont-up">
+    <textarea name="text" id="text">{{data[3]}}</textarea>
+    <div class="info">
+        <img id="imgs"
+        {% if data[4]=="None" %}
+            class="img"
+        {% else %}
+            src="/{{data[4]}}"
+            class="img active"
+        {% endif %}
+        >
+        <video id="vids" class="vid"></video>
+    </div>
+    <div class="cont">
+        <label for="fileImg" class="subir" id="buttonFile">
+            <i class='bx bxs-image-add'></i>
+        </label>
+        <input id="fileImg" name="fileImg" multiple
+            accept=".png, .jpeg, .jpg, .bmp, .ico, .svg, .webp, .gif, .psd, .heic, .nef, .crw, .ai, .id"
+            onchange='file_img()' type="file" />
+        <label for="fileVid" class="subir" style="display: none;">
+            <i class='bx bxs-video'></i>
+        </label>
+        <input id="fileVid" name="fileVid" multiple accept=".avi, .mp4, .divx,.mov, ,mpg, .mkv, .wmv, .wpl, .webm"
+            onchange='file_vid()' type="file" />
+        <input type="submit" value="Guardar">
+    </div>
+</form>
+{% endblock %}

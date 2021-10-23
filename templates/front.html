@@ -8,6 +8,30 @@
 
 {% block content_layout %}
 
+<form action="/Post" method="POST" enctype="multipart/form-data" class="cont-up">
+    <textarea name="text" id="text"></textarea>
+    <div class="info">
+        <img id="imgs" class="img">
+        <video id="vids" class="vid"></video>
+    </div>
+    <div class="cont">
+        <label for="fileImg" class="subir" id="buttonFile">
+            <i class='bx bxs-image-add'></i>
+        </label>
+        <input id="fileImg" name="fileImg" multiple
+            accept=".png, .jpeg, .jpg, .bmp, .ico, .svg, .webp, .gif, .psd, .heic, .nef, .crw, .ai, .id"
+            onchange='file_img()' type="file" />
+        <label for="fileVid" class="subir" style="display: none;">
+            <i class='bx bxs-video'></i>
+        </label>
+        <input id="fileVid" name="fileVid" multiple accept=".avi, .mp4, .divx,.mov, ,mpg, .mkv, .wmv, .wpl, .webm"
+            onchange='file_vid()' type="file" />
+        <input type="submit" value="Publicar">
+    </div>
+</form>
+
+{% for post in dataPost %}
+
 <div class="post">
     <div class="info">
         <div class="foto">
@@ -15,149 +39,41 @@
         </div>
         <div class="desc">
             <div class="user-date">
-                <p><strong>Username</strong></p>
-                <p>xx/xx/xxxx</p>
+                <p><strong>{{post[1]}}</strong></p>
+                <p>{{post[2]}}</p>
             </div>
+            {% if rol!="USUARIO" or user==post[1] %}
             <div class="op-button">
                 <i class="fas fa-ellipsis-h"></i>
                 <div class="op-menu">
-                    <p>Editar publicación</p>
-                    <p>Eliminar publicación</p>
+                    <p><a href="/Post/Edit/{{post[1]}}/{{post[0]}}">Editar publicación</a></p>
+                    <p><a href="/Post/Delete/{{post[1]}}/{{post[0]}}">Eliminar publicación</a></p>
                 </div>
             </div>
+            {% endif %}
+            
         </div>
     </div>
     <div class="mensaje">
-        <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias veritatis optio
-            officiis assumenda accusamus unde. Possimus minus, beatae, est dolore, dolorum odit facilis
-            pariatur illo optio cum animi ea? In.</p>
+        <p class="msg">
+            {% set mensage = post[3].split('\n') %}
+            {% for msg in mensage %}
+                {{msg}}<br>
+            {% endfor %}
+        </p>
     </div>
-    <div class="imagen">
-        <div class="img-post">IMAGEN</div>
-    </div>
+    {% if post[4]!='None' %}
+        <div class="imagen">
+            <div class="img-post"><img src="{{post[4]}}" alt=""></div>
+        </div>
+    {% endif %}
+    
     <div class="comentarios">
         <i class="fas fa-comment"></i>
-        <p><strong>Comentarios (3)</strong></p>
+        <p><strong>Comentarios (0)</strong></p>
     </div>
 </div>
-<div class="post">
-    <div class="info">
-        <div class="foto">
-            <p>Foto</p>
-        </div>
-        <div class="desc">
-            <div class="user-date">
-                <p><strong>Username</strong></p>
-                <p>xx/xx/xxxx</p>
-            </div>
-            <div class="op-button">
-                <i class="fas fa-ellipsis-h"></i>
-                <div class="op-menu">
-                    <p>Editar publicación</p>
-                    <p>Eliminar publicación</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="mensaje">
-        <p class="msg">Lorem ipsum dolor sit amet</p>
-    </div>
-    <div class="comentarios">
-        <i class="fas fa-comment"></i>
-        <p><strong>Comentarios (10)</strong></p>
-    </div>
-</div>
-<div class="post">
-    <div class="info">
-        <div class="foto">
-            <p>Foto</p>
-        </div>
-        <div class="desc">
-            <div class="user-date">
-                <p><strong>Username</strong></p>
-                <p>xx/xx/xxxx</p>
-            </div>
-            <div class="op-button">
-                <i class="fas fa-ellipsis-h"></i>
-                <div class="op-menu">
-                    <p>Editar publicación</p>
-                    <p>Eliminar publicación</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="mensaje">
-        <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias veritatis optio
-            officiis assumenda accusamus unde. Possimus minus, beatae, est dolore, dolorum odit facilis
-            pariatur illo optio cum animi ea? In.</p>
-    </div>
-    <div class="comentarios">
-        <i class="fas fa-comment"></i>
-        <p><strong>Comentarios (35)</strong></p>
-    </div>
-</div>
-<div class="post">
-    <div class="info">
-        <div class="foto">
-            <p>Foto</p>
-        </div>
-        <div class="desc">
-            <div class="user-date">
-                <p><strong>Username</strong></p>
-                <p>xx/xx/xxxx</p>
-            </div>
-            <div class="op-button">
-                <i class="fas fa-ellipsis-h"></i>
-                <div class="op-menu">
-                    <p>Editar publicación</p>
-                    <p>Eliminar publicación</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="mensaje">
-        <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias veritatis optio
-            officiis assumenda accusamus unde. Possimus minus, beatae, est dolore, dolorum odit facilis
-            pariatur illo optio cum animi ea? In.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas accusantium aut laboriosam eligendi architecto enim asperiores cupiditate maiores labore tempore voluptatum, commodi natus eveniet nam soluta veritatis! Dolorum incidunt enim reiciendis ratione cum. Officiis optio suscipit commodi libero alias? Rerum cum accusantium incidunt voluptates quidem officia numquam, harum asperiores quaerat!</p>
-    </div>
-    <div class="imagen">
-        <div class="img-post">IMAGEN</div>
-    </div>
-    <div class="comentarios">
-        <i class="fas fa-comment"></i>
-        <p><strong>Comentarios (1103)</strong></p>
-    </div>
-</div>
-<div class="post">
-    <div class="info">
-        <div class="foto">
-            <p>Foto</p>
-        </div>
-        <div class="desc">
-            <div class="user-date">
-                <p><strong>Username</strong></p>
-                <p>xx/xx/xxxx</p>
-            </div>
-            <div class="op-button">
-                <i class="fas fa-ellipsis-h"></i>
-                <div class="op-menu">
-                    <p>Editar publicación</p>
-                    <p>Eliminar publicación</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="mensaje">
-        <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias veritatis optio
-            officiis assumenda accusamus unde. Possimus minus, beatae, est dolore, dolorum odit facilis
-            pariatur illo optio cum animi ea? In.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quos unde omnis, quis sint dolor quasi voluptatum qui nesciunt consequuntur voluptates, ratione officia expedita repellendus ullam, inventore quisquam exercitationem. Ea perferendis recusandae doloremque cupiditate maiores facere iusto provident at soluta tempore ut maxime assumenda dolorem suscipit quod est voluptates rem, ipsam quas, minima consectetur eligendi quam error? Omnis adipisci fugiat aliquam, laboriosam inventore vero, nisi quasi earum dolores eum officiis, aperiam ipsa provident deleniti! Corrupti labore ut adipisci ex, sit pariatur quasi aut voluptatibus porro totam aspernatur reiciendis nam cum accusamus optio! Magni corporis quo laboriosam libero aspernatur itaque rerum, repudiandae sunt! Laudantium tenetur eos qui vero consequuntur corrupti consequatur minus tempore numquam reprehenderit nam deleniti molestiae, dolor placeat nesciunt ab ad doloremque, corporis quia. Est, iure. Obcaecati, incidunt a placeat officia modi debitis. Eos recusandae vel dicta nisi reprehenderit, cum, asperiores in magnam odit nihil tempora saepe. Veniam, voluptas.</p>
-    </div>
-    <div class="comentarios">
-        <i class="fas fa-comment"></i>
-        <p><strong>Comentarios (102)</strong></p>
-    </div>
-</div>
+
+{% endfor %}
 
 {% endblock %}
