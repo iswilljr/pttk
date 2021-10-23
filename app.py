@@ -29,7 +29,7 @@ def Login():
     return render_template('index.html')
 
 @app.route('/Signup', methods=['GET','POST'])
-def SignUP():
+def Signup():
     if request.method == 'POST':
         email=escape(request.form['email'])
         user=escape(request.form['user'])
@@ -75,7 +75,7 @@ def Home():
 
 @app.route('/Post',methods=['POST'])
 def Post():
-    if 'user'in session:
+    if 'user' in session:
         global message,img,fecha
         if request.method=='POST':
             message=str(escape(request.form['text']))
