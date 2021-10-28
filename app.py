@@ -9,7 +9,7 @@ def Login():
         user=escape(request.form['user'])
         pw=escape(request.form['pass'])
         try:
-            with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+            with sqlite3.connect('database.db') as db:
                 cur = db.cursor()
                 data=cur.execute("SELECT clave, rol FROM Sesiones WHERE username = ?",[user]).fetchone()
                 if not data is None:
@@ -46,7 +46,7 @@ def Signup():
             flash('Contraseña invalido')
             return redirect('/Signup')
         try:
-            with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+            with sqlite3.connect('database.db') as db:
                 cur = db.cursor()
                 userUse=cur.execute("SELECT username FROM Sesiones WHERE username = ?",[user]).fetchone()
                 if userUse is None:
@@ -65,7 +65,7 @@ def Home():
     if 'user' in session:
         session['rdct']="/Inicio"
         try:
-            with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+            with sqlite3.connect('database.db') as db:
                 cur = db.cursor()
                 dataPost=cur.execute("SELECT * FROM Posts ORDER BY id desc").fetchall()
                 dataComt=cur.execute("SELECT * FROM Comentarios").fetchall()
@@ -89,7 +89,7 @@ def Post():
             fecha=str(datetime.today()).split(" ")
             user=session['user']
             try:
-                with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+                with sqlite3.connect('database.db') as db:
                     cur = db.cursor()
                     cur.execute("INSERT INTO Posts(username,fecha,mensaje,imagen) VALUES(?,?,?,?)",(user,fecha[0],message,img))
                     flash("¡Subido con éxito!")
@@ -108,7 +108,7 @@ def PostComt():
             username=escape(session['user'])
             comentario=escape(request.form['comentario'])
             try:
-                with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+                with sqlite3.connect('database.db') as db:
                     cur = db.cursor()
                     cur.execute("INSERT INTO Comentarios(id_post,username,comentario,destino)VALUES(?,?,?,?)",(id_post,username,comentario,destino))
                     flash("Mensaje comentado")
@@ -127,7 +127,7 @@ def PostComEdit():
             id_comt=int(escape(request.form['id-comt-post']))
             comentario=escape(request.form['post-comt-edit'])
             try:
-                with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+                with sqlite3.connect('database.db') as db:
                     cur = db.cursor()
                     cur.execute("UPDATE Comentarios SET comentario = ? WHERE id_comt = ?",(comentario,id_comt))
                     flash("Comentario actualizado")
@@ -142,7 +142,7 @@ def PostComEdit():
 def PostComtDelt(id):
     if 'user' in session:
         try:
-            with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+            with sqlite3.connect('database.db') as db:
                 cur = db.cursor()
                 comp=cur.execute("SELECT username,destino FROM Comentarios WHERE id_comt = ?",[id]).fetchone()
                 if session['user']==comp[0] or session['user']==comp[1] or session['rol']!='USUARIO':
@@ -161,7 +161,7 @@ def EditDelete(user,id):
     global rdrct
     if 'user' in session:
         try:
-            with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+            with sqlite3.connect('database.db') as db:
                 cur = db.cursor()
                 if request.path==f'/Post/Edit/{user}/{id}' and (session['rol']!='USUARIO' or user==session['user']):
                     if request.method=='POST':
@@ -195,7 +195,7 @@ def EditDelete(user,id):
 def Profile(username):
     if 'user' in session:
         try:
-            with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+            with sqlite3.connect('database.db') as db:
                 db.row_factory=sqlite3.Row
                 cur = db.cursor()
                 dataUser=cur.execute("SELECT username,email,pais,ciudad,telefono,descripcion FROM Sesiones WHERE username = ?",[username]).fetchone()
@@ -220,7 +220,7 @@ def ProfileEdit(username):
                 user=request.form['user']
                 email=request.form['email']
                 try:
-                    with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+                    with sqlite3.connect('database.db') as db:
                         cur = db.cursor()
                         if user!=username:
                             userUse=cur.execute("SELECT username FROM Sesiones WHERE username = ?",[user]).fetchone()
@@ -247,7 +247,7 @@ def ProfileDelete(username):
     if 'user' in session:
         if session['rol']!='USUARIO':
             try:
-                with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+                with sqlite3.connect('database.db') as db:
                     cur= db.cursor()
                     cur.execute("DELETE FROM Comentarios WHERE username = ?",[username])
                     cur.execute("DELETE FROM Posts WHERE username = ?",[username])
@@ -266,7 +266,7 @@ def Dash():
     if 'user' in session:
         session['rdct']="/Dash"
         try:
-            with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+            with sqlite3.connect('database.db') as db:
                 cur = db.cursor()
                 dataPost=cur.execute("SELECT * FROM Posts WHERE username = ? ORDER BY id desc",[session['user']]).fetchall()
                 dataComt=cur.execute("SELECT * FROM Comentarios WHERE destino = ? or username = ?",(session['user'],session['user'])).fetchall()
@@ -285,7 +285,7 @@ def DashPost():
                 pass
             else:
                 try:
-                    with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+                    with sqlite3.connect('database.db') as db:
                         cur = db.cursor()
                         dataPost=cur.execute("SELECT * FROM Posts WHERE id = ?",[consulta]).fetchone()
                         dataComt=cur.execute("SELECT * FROM Comentarios WHERE id_post = ?",[consulta]).fetchall()
@@ -311,7 +311,7 @@ def DashUser():
         else:
             if consulta!=session['user'] and session['rol']!='USUARIO':
                 try:
-                    with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+                    with sqlite3.connect('database.db') as db:
                         cur = db.cursor()
                         dataUser=cur.execute("SELECT username,descripcion,rol FROM Sesiones WHERE username = ?",[consulta]).fetchone()
                         dataPost=cur.execute("SELECT * FROM Posts WHERE username = ? ORDER BY id desc",[consulta]).fetchall()
@@ -335,7 +335,7 @@ def ProfileRol(rol):
             if session['rol']=='SUPERADMINISTRADOR':
                 if rol=='USUARIO' or rol=='ADMINISTRADOR' or rol=='SUPERADMINISTRADOR':
                     try:
-                        with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+                        with sqlite3.connect('database.db') as db:
                             cur= db.cursor()
                             cur.execute("UPDATE Sesiones SET rol = ? WHERE username = ?",(rol,usuario))
                             flash("Rol cambiado con éxito")
@@ -357,7 +357,7 @@ def Search():
             busqueda="None"
         else:
             try:
-                with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
+                with sqlite3.connect('database.db') as db:
                     cur = db.cursor()
                     busqueda=cur.execute("SELECT username,descripcion FROM Sesiones WHERE username LIKE ?",[consulta]).fetchall()
                     posts=cur.execute("SELECT * FROM Posts WHERE mensaje LIKE ? ORDER BY id desc",[consulta2]).fetchall()
