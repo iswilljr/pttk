@@ -4,129 +4,31 @@
 
 {% block link %}
 <link rel="stylesheet" href="{{url_for('static',filename='css/style_search.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/style_front.css')}}">
 {% endblock %}
 
 {% block content_layout %}
 
+{% if busqueda or posts %}
+
+{% for user in busqueda %}
 <div class="busqueda">
     <div class="foto">
         <p>Foto</p>
     </div>
     <div class="s-content">
-        <p id="user"><strong>Username</strong></p>
+        <p id="user"><strong><a href="/User/{{user[0]}}">{{user[0]}}</a></strong></p>
         <div class="desc">
-            <p>Descripción</p>
-            <div></div>
+            <p>{{user[1]}}</p>
         </div>
     </div>
 </div>
-<div class="busqueda">
-    <div class="foto">
-        <p>Foto</p>
-    </div>
-    <div class="s-content">
-        <p id="user"><strong>Username</strong></p>
-        <div class="desc">
-            <p>Descripción</p>
-            <div></div>
-        </div>
-    </div>
-</div>
-<div class="busqueda">
-    <div class="foto">
-        <p>Foto</p>
-    </div>
-    <div class="s-content">
-        <p id="user"><strong>Username</strong></p>
-        <div class="desc">
-            <p>Descripción</p>
-            <div></div>
-        </div>
-    </div>
-</div>
-<div class="busqueda">
-    <div class="foto">
-        <p>Foto</p>
-    </div>
-    <div class="s-content">
-        <p id="user"><strong>Username</strong></p>
-        <div class="desc">
-            <p>Descripción</p>
-            <div></div>
-        </div>
-    </div>
-</div>
-<div class="busqueda">
-    <div class="foto">
-        <p>Foto</p>
-    </div>
-    <div class="s-content">
-        <p id="user"><strong>Username</strong></p>
-        <div class="desc">
-            <p>Descripción</p>
-            <div></div>
-        </div>
-    </div>
-</div>
-<div class="busqueda">
-    <div class="foto">
-        <p>Foto</p>
-    </div>
-    <div class="s-content">
-        <p id="user"><strong>Username</strong></p>
-        <div class="desc">
-            <p>Descripción</p>
-            <div></div>
-        </div>
-    </div>
-</div>
-<div class="busqueda">
-    <div class="foto">
-        <p>Foto</p>
-    </div>
-    <div class="s-content">
-        <p id="user"><strong>Username</strong></p>
-        <div class="desc">
-            <p>Descripción</p>
-            <div></div>
-        </div>
-    </div>
-</div>
-<div class="busqueda">
-    <div class="foto">
-        <p>Foto</p>
-    </div>
-    <div class="s-content">
-        <p id="user"><strong>Username</strong></p>
-        <div class="desc">
-            <p>Descripción</p>
-            <div></div>
-        </div>
-    </div>
-</div>
-<div class="busqueda">
-    <div class="foto">
-        <p>Foto</p>
-    </div>
-    <div class="s-content">
-        <p id="user"><strong>Username</strong></p>
-        <div class="desc">
-            <p>Descripción</p>
-            <div></div>
-        </div>
-    </div>
-</div>
-<div class="busqueda">
-    <div class="foto">
-        <p>Foto</p>
-    </div>
-    <div class="s-content">
-        <p id="user"><strong>Username</strong></p>
-        <div class="desc">
-            <p>Descripción</p>
-            <div></div>
-        </div>
-    </div>
-</div>
+{% endfor %}
+{% for post in posts %}
+{% include 'layouts/post/post.html' %}
+{% endfor %}
+{% else %}
+<p id="no-results">Sin resultados encontrados</p>
+{% endif %}
 
 {% endblock %}

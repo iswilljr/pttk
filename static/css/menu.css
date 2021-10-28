@@ -8,6 +8,51 @@ body{
     background: var(--background-color);
 }
 
+.alert{
+    position: fixed;
+    width: 250px;
+    height: 50px;
+    top: 65px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: #fff;
+    color: #00000d;
+    z-index: 999;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+}
+
+.alert.desactive{
+    display: none;
+}
+
+.alert div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: calc(100% - 35px);
+    height: 100%;
+    background: none;
+}
+
+.alert i{
+    width: 35px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 50px;
+    vertical-align: middle;
+}
+
 .navbar{
     position: fixed;
     width: 100%;
@@ -65,8 +110,7 @@ body{
     height: 100%;
 }
 
-.navbar .navbar-contenedor .navbar-menu form input,
-.navbar .navbar-contenedor .navbar-menu form button{
+.navbar .navbar-contenedor .navbar-menu form input{
     outline: none;
     border: 1px solid #00000d;
     height: 31px;
@@ -75,12 +119,12 @@ body{
     background: inherit;
 }
 
-.navbar .navbar-contenedor .navbar-menu form input{
-    padding: 0 10px;
+.navbar .navbar-contenedor .navbar-menu form input[type="search"]{
+    padding: 0 3px;
     width: 280px;
 }
 
-.navbar .navbar-contenedor .navbar-menu form button{
+.navbar .navbar-contenedor .navbar-menu form input[type="submit"]{
     width: 50px;
     margin-left: 5px;
 }
@@ -172,18 +216,19 @@ body{
         width: 100%;
         height: 50px;
     }
-    .menu-responsive .navbar-menu-r form input,
-    .menu-responsive .navbar-menu-r form button{
+    .menu-responsive .navbar-menu-r form input{
         outline: none;
         border: 1px solid #00000d;
         background: none;
         box-sizing: border-box;
     }
-    .menu-responsive .navbar-menu-r form input{
+    .menu-responsive .navbar-menu-r form input[type="search"]{
         width: 80%;
         height: 31px;
+        padding: 0 3px;
+        box-sizing: border-box;
     }
-    .menu-responsive .navbar-menu-r form button{
+    .menu-responsive .navbar-menu-r form input[type="submit"]{
         width: 15%;
         height: 31px;
     }
@@ -211,11 +256,11 @@ body{
 
 @media screen and (max-width:350px) {
 
-    .menu-responsive .navbar-menu-r form input{
+    .menu-responsive .navbar-menu-r form input[type="search"]{
         width: 70%;
         height: 31px;
     }
-    .menu-responsive .navbar-menu-r form button{
+    .menu-responsive .navbar-menu-r form input[type="submit"]{
         width: 25%;
         height: 31px;
     }
@@ -252,10 +297,10 @@ body{
     .menu-responsive .navbar-menu-r form{
         height: 25px;
     }
-    .menu-responsive .navbar-menu-r form input{
+    .menu-responsive .navbar-menu-r form input[type="search"]{
         height: 21px;
     }
-    .menu-responsive .navbar-menu-r form button{
+    .menu-responsive .navbar-menu-r form input[type="submit"]{
         height: 21px;
     }
     .menu-responsive .navbar-menu-r .menu-r{

@@ -1,0 +1,38 @@
+{% extends "dash.html" %}
+
+{% block postEdit %}
+
+<div class="dash-content-item active">
+    {% if dataPost!='None' %}
+    {% set post = dataPost %}
+    {% include 'layouts/post/post.html' %}
+    {% else %}
+    Post no encontrado, ingresa un ID válido
+    {% endif %}
+</div>
+
+{% endblock %}
+
+{% block comtEdit %}
+<div class="dash-content-item">
+    {% if dataPost!='None' %}
+    {% for comt in dataComt %}
+    <div class="busqueda">
+        <div class="foto">
+            <p>Foto</p>
+        </div>
+        <div class="s-content">
+            <p id="user"><strong><a href="/User/{{comt[2]}}">{{comt[2]}}</a></strong></p>
+            <p id="ver-post"><strong>Post de {{comt[4]}}</strong> <a href="/Inicio#{{comt[1]}}">Ver post</a></p>
+            <div class="desc" id="comt-dash">
+                <p>{{comt[3]}}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    Post no encontrado, ingresa un ID válido
+    {% endif %}
+    
+</div>
+{% endblock %}

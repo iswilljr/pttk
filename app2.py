@@ -1,4 +1,9 @@
-from datetime import datetime; from flask import Flask, render_template, redirect, request, flash, session; import os, sqlite3, utils; from sqlite3 import Error; from werkzeug.security import generate_password_hash, check_password_hash; from markupsafe import escape
+from datetime import datetime
+from flask import Flask, render_template, redirect, request, flash, session
+import os, sqlite3
+from sqlite3 import Error
+from werkzeug.security import generate_password_hash, check_password_hash
+from markupsafe import escape
 
 app = Flask(__name__)
 app.secret_key=os.urandom(24)
@@ -36,15 +41,6 @@ def Signup():
         user=escape(request.form['user'])
         pw=escape(request.form['pass'])
         pw_hash=generate_password_hash(pw)
-        if not utils.isEmailValid(email):
-            flash('Email invalido')
-            return redirect('/Signup')
-        elif not utils.isUsernameValid(user):
-            flash('Usuario invalido')
-            return redirect('/Signup')
-        elif not utils.isPasswordValid(pw):
-            flash('Contraseña invalido')
-            return redirect('/Signup')
         try:
             with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
                 cur = db.cursor()
@@ -74,7 +70,7 @@ def Home():
             print(Error)
     else:
         return redirect('/')
-        
+
 @app.route('/Post',methods=['POST'])
 def Post():
     if 'user' in session:
@@ -82,7 +78,7 @@ def Post():
             message=str(escape(request.form['text']))
             file=request.files['fileImg']
             if file.filename!='':
-                img=f"static/img/{file.filename}"
+                img=f"/home/WillJr/mysite/static/img/{file.filename}"
                 file.save(img)
             else:
                 img='None'
@@ -148,7 +144,7 @@ def PostComtDelt(id):
                 if session['user']==comp[0] or session['user']==comp[1] or session['rol']!='USUARIO':
                     cur.execute("DELETE FROM Comentarios WHERE id_comt= ?",[id])
                     flash("Comentario eliminado")
-                return redirect(session['rdct'])    
+                return redirect(session['rdct'])
         except Error:
             print(Error)
         return redirect(session['rdct'])
@@ -158,7 +154,6 @@ def PostComtDelt(id):
 @app.route('/Post/Edit/<string:user>/<int:id>',methods=['GET','POST'])
 @app.route('/Post/Delete/<string:user>/<int:id>',methods=['GET'])
 def EditDelete(user,id):
-    global rdrct
     if 'user' in session:
         try:
             with sqlite3.connect('/home/WillJr/mysite/database.db') as db:
@@ -169,7 +164,7 @@ def EditDelete(user,id):
                         file=request.files['fileImg']
                         fecha=str(datetime.today()).split(" ")
                         if file.filename!='':
-                            img=f"static/img/{file.filename}"
+                            img=f"/home/WillJr/mysite/static/img/{file.filename}"
                             file.save(img)
                             cur.execute("UPDATE Posts SET mensaje=?, imagen=?, fecha=? WHERE id = ?",(message,img,fecha[0],id))
                         else:
@@ -226,12 +221,11 @@ def ProfileEdit(username):
                             userUse=cur.execute("SELECT username FROM Sesiones WHERE username = ?",[user]).fetchone()
                             if userUse!=None:
                                 user=username
-                                r=username
                                 flash("Usuario en uso")
                             else:
                                 cur.execute("UPDATE Posts SET username = ? WHERE username = ?",(user,username))
                         cur.execute("UPDATE Sesiones SET email=?,username=?,descripcion=?,pais=?,ciudad=?,telefono=? WHERE username=?",(email,user,desc,pais,ciud,tel,username))
-                        flash("Perfil actualizado")   
+                        flash("Perfil actualizado")
                         if username==session['user']:
                             session['user']=user
                             return redirect(f"/User/{session['user']}")
@@ -374,7 +368,4 @@ def Search():
 def Logout():
     if 'user' in session:
         session.popitem()
-    return redirect('/')  
-
-if __name__=='__main__':
-    app.run( host='0.0.0.0', port=443, ssl_context=('micertificado.pem', 'llaveprivada.pem'), debug=True)
+    return redirect('/')

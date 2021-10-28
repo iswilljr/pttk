@@ -1,6 +1,6 @@
 .post{
     width: 70%;
-    min-height: 150px;
+    min-height: 130px;
     background: #fff;
     border-radius: 15px;
     margin-bottom: 15px;
@@ -47,6 +47,11 @@
     align-items: flex-start;
     width: 150px;
     height: 100%;
+}
+
+.post .info .desc .user-date a{
+    color: #00000d;
+    text-decoration: none;
 }
 
 .post .info .desc .op-button{
@@ -108,11 +113,26 @@
 
 .post .mensaje{
     display: flex;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    min-height: 50px;
+    min-height: 30px;
     padding: 0 10px 0 5px;
     box-sizing: border-box;
+}
+
+.post .mensaje .msg{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+}
+
+.post .mensaje .msg p{
+    display: block;
+    width: 100%;
 }
 
 .post .imagen{
@@ -142,16 +162,141 @@
 
 .post .comentarios{
     display: flex;
+    flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
     width: 100%;
-    height: 30px;
-    padding: 0 15px;
+    min-height: 30px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+.post .comentarios .comt-msgs{
+    display: none;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border-top: 1px solid var(--color-undefined);
+}
+
+.post .comentarios .comt-msgs.active{
+    display: flex;
+}
+
+.post .comentarios .comt-msgs a{
+    text-decoration: none;
+    color: #00000d;
+}
+
+.post .comentarios .comt-msgs .comt-msg{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--background-color);
+    border-radius: 15px;
+    margin-top: 5px;
+    padding: 5px;
     box-sizing: border-box;
 }
 
+.post .comentarios .comt-msgs .comt-msg .cont-etdt-comt{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    cursor: pointer;
+}
 
-.post .comentarios p{
+.post .comentarios .comt-msgs .comt-msg .cont-etdt-comt button{
+    outline: none;
+    width: 25px;
+    height: 30px;
+    font-size: 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.post .comentarios .comt-msgs .comt-msg .txta-comt{
+    width: 98%;
+    height: 35px;
+}
+
+.post .comentarios .comt-msgs .comt-msg .txta-comt input[type="text"]{
+    outline: none;
+    border: 1px solid #00000d;
+    background: none;
+    width: calc(100% - 120px);
+    height: 30px;
+    padding: 0 3px;
+    box-sizing: border-box;
+}
+
+.post .comentarios .comt-msgs .comt-msg .txta-comt input[type="submit"],
+.post .comentarios .comt-msgs .comt-msg .txta-comt button{
+    width: 55px;
+    height: 30px;
+    border: 1px solid #00000d;
+    outline: none;
+    background: none;
+}
+
+.post .comentarios .comt-btn{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    user-select: none;
+    padding: 0 5px;
+    box-sizing: border-box;
+}
+
+.post .comentarios .comt-btn form{
+    display: flex;
+    opacity: 0;
+    justify-content: flex-start;
+    align-items: center;
+    width: calc(100% - 150px);
+    height: 100%;
+    pointer-events: none;
+}
+
+.post .comentarios .comt-btn.active form{
+    pointer-events: all;
+    opacity: 1;
+}
+
+.post .comentarios .comt-btn form input[type="text"]{
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #00000d;
+    width: 0;
+    height: 20px;
+}
+
+.post .comentarios .comt-btn.active form input[type="text"]{
+    width: calc(100% - 25px);
+    transition: width .4s ease;
+}
+
+.post .comentarios .comt-btn.active form label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 100%;
+    font-size: 25px;
+}
+
+.post .comentarios .comt-btn .btn-comt{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 100%;
     cursor: pointer;
 }
 

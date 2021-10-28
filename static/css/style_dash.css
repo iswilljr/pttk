@@ -342,18 +342,16 @@
     font-size: 25px;
 }
 
-#comt .foto{
-    margin-top: 5px;
-}
-
-#comt i{
-    margin-top: 15px;
-    margin-right: 10px;
-}
-
-#comt-dash{
+.busqueda .s-content #comt-dash p{
     background: none;
-    height: auto;
+}
+.busqueda .s-content #ver-post{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+.busqueda .s-content #ver-post a{
+    color: #00000d;
 }
 
 @media screen and (max-height:270px) {
@@ -364,4 +362,94 @@
         overflow-y: auto;
         height: auto;
     }
+}
+.comt-msg a{
+    text-decoration: none;
+    color: #00000d;
+}
+
+.comt-msg{
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    width: 95%;
+    min-height: 100px;
+    background: var(--background-color);
+    border-radius: 15px;
+    margin-top: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.comt-msg .foto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 90px;
+    background: var(--color-normal);
+    border-radius: 100px;
+    font-size: 20px;
+}
+
+.comt-msg .cont-etdt-comt{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.comt-msg .cont-etdt-comt button{
+    outline: none;
+    width: 25px;
+    height: 35px;
+    font-size: 25px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.comt-msg .content-comt{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 5px;
+    width: calc(100% - 105px);
+    height: auto;
+    top: 25px;
+}
+
+.comt-msg .content-comt #user{
+    font-size: 20px;
+}
+
+.comt-msg .content-comt .comt-post{
+    height: auto;
+    font-size: 20px;
+}
+
+.comt-msg .content-comt .txta-comt{
+    width: 98%;
+    height: 35px;
+    border: none;
+}
+
+.comt-msg .content-comt .txta-comt input[type="text"]{
+    outline: none;
+    border: 1px solid #00000d;
+    background: none;
+    width: calc(100% - 160px);
+    height: 30px;
+    padding: 0 3px;
+    box-sizing: border-box;
+}
+
+.comt-msg .content-comt .txta-comt input[type="submit"],
+.comt-msg .content-comt .txta-comt button{
+    width: 70px;
+    height: 30px;
+    border: 1px solid #00000d;
+    outline: none;
+    background: none;
 }

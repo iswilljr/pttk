@@ -49,6 +49,63 @@ function file_vid() {
     }
 }
 
+let btnsPost = document.querySelectorAll('.btn-dlt-pst')
+btnsPost.forEach(btn => {
+    btn.onclick = e=>{
+        if(!confirm('Seguro que quiere eliminar el post?')){
+            e.preventDefault()
+            opcs.forEach(opc => {
+                opc.className = "op-menu"
+            });
+        }
+    }
+});
+
+let formComt = document.querySelectorAll('.comt-btn')
+let btnComt = document.querySelectorAll('.btn-comt')
+let Comt = document.querySelectorAll('.comt-msgs')
+for(let btn in btnComt){
+    btnComt[btn].onclick = function(){
+        Comt[btn].classList.toggle('active')
+        formComt[btn].classList.toggle('active')
+    }
+}
+
+let btnDeltComt = document.querySelectorAll('.delt-comt')
+btnDeltComt.forEach(btn => {
+    btn.onclick = e=>{
+        if(!confirm('¿Está seguro de eliminar del comentario?')){
+            e.preventDefault()
+        }
+    }
+});
+let btnEditComt = document.querySelectorAll('.edit-comt')
+let postComt = document.querySelectorAll('.txta-comt')
+let comtArea = document.querySelectorAll('.comt-post')
+for(let btn in btnEditComt){
+    btnEditComt[btn].onclick = function(){
+        postComt[btn].setAttribute('style','display: block;')
+        comtArea[btn].setAttribute('style','display: none;')
+        btnEditComt.forEach(btn => {
+            btn.setAttribute('style','display: none;')
+        });
+    }
+}
+
+let btnCantEditComt = document.querySelectorAll('.btn-can-comt')
+
+
+for(let i in btnCantEditComt){
+    btnCantEditComt[i].onclick = e=>{
+        e.preventDefault()
+        btnEditComt.forEach(btn => {
+            btn.setAttribute('style','display: inline;')
+        });
+        postComt[i].setAttribute('style','display: none;')
+        comtArea[i].setAttribute('style','display: block;')
+    }
+}
+
 // frontpage end
 
 
@@ -136,6 +193,7 @@ function habilitar() {
 let dash_items = document.querySelectorAll(".dash-item");
 let dash_conts = document.querySelectorAll(".dash-content-item")
 let optionDash = document.querySelectorAll('.option-dash')
+let consulta = document.getElementById('consulta')
 for (let i = 0; i < dash_items.length; i++) {
     dash_items[i].onclick = function () {
         for (let k = 0; k < optionDash.length; k++) {
@@ -151,14 +209,16 @@ for (let i = 0; i < dash_items.length; i++) {
         dash_conts[i].className = "dash-content-item active";
         if(i==0){
             optionDash[0].setAttribute('selected', 'selected')
-            formDash.setAttribute('style','display: none;')
+            consulta.setAttribute('placeholder','Ingresa el id de un post para modificarlo')
         }else if(i==1){
             optionDash[1].setAttribute('selected','selected')
-            formDash.setAttribute('style','display: none;')
+            consulta.setAttribute('placeholder','Ingresa el id de un post para modificarlo')
         }else if(i==2){
             optionDash[2].setAttribute('selected','selected')
+            consulta.setAttribute('placeholder','Ingresa un usuario para ver y modificar su contenido')
         }else if(i==3){
             optionDash[3].setAttribute('selected','selected')
+            consulta.setAttribute('placeholder','Ingresa un usuario para ver y modificar su contenido')
         }
     }
 }
@@ -185,7 +245,7 @@ for (let i = 0; i < buttonUserDash.length; i++) {
 
 let formRol = document.getElementById('formRol')
 function user(){
-    formRol.action="/Dash/User/Rol/USUARIOO"
+    formRol.action="/Dash/User/Rol/USUARIO"
 }
 function admin(){
     formRol.action="/Dash/User/Rol/ADMINISTRADOR"
@@ -194,3 +254,9 @@ function superadmin(){
     formRol.action="/Dash/User/Rol/SUPERADMINISTRADOR"
 }
 // dashboard end
+
+
+function flash(){
+    let flashMenu = document.querySelector('.alert');
+    flashMenu.className = "alert desactive";
+}

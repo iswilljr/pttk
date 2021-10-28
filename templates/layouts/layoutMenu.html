@@ -11,14 +11,26 @@
     <title>{% block title %}{% endblock  %}</title>
 </head>
 <body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert">
+                <div>
+                    {% for msg in messages %}
+                        <p>{{ msg }}</p>
+                    {% endfor %}
+                </div>
+                <i class='bx bx-x' id="button-flash" onclick="flash()"></i>
+            </div>                   
+        {% endif %}
+    {% endwith %}
     <nav class="navbar">
         <div class="navbar-contenedor">
             <h1><a href="/Inicio">SOCIAL PTTK</a></h1>
             <i class="bx bx-menu"></i>
             <div class="navbar-menu">
-                <form action="/Search">
-                    <input type="search">
-                    <button>Search</button>
+                <form action="/Search" method="GET">
+                    <input type="search" name="search" id="search" spellcheck="false" autocomplete="off">
+                    <input type="submit" value="Buscar">
                 </form>
                 <ul class="menu">
                     <li class="item-menu">
@@ -52,8 +64,8 @@
     <div class="menu-responsive">
         <nav class="navbar-menu-r">
             <form action="/Search">
-                <input type="search">
-                <button>Search</button>
+                <input type="search" name="search" id="search" spellcheck="false" autocomplete="off">
+                <input type="submit" value="Buscar">
             </form>
             <ul class="menu-r">
                 <li class="item-menu-r">

@@ -41,74 +41,8 @@
         </ul>
     </div>
     <div class="contenido">
-        <form class="content-user active" action="/User/{{user}}/Edit" method="POST" onsubmit="habilitar()">
-            <div class="foto-user">
-                FOTO
-                {% if username==user %}
-                <i class="fas fa-pen"></i>
-                {% endif %}
-            </div>
-            <div class="desc-user">
-                <div>
-                    <input type="text" name="desc" id="desc" class="input-edit-cont" value="{{dataUser['descripcion']}}" disabled>
-                    {% if username==user or rol!='USUARIO' %}
-                    <i class="fas fa-pen edit-cont"></i>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="info-user">
-                <div>
-                    <strong>Username: </strong>
-                    <div>
-                        <input type="text" name="user" id="user" class="input-edit-cont" value="{{dataUser['username']}}" disabled>
-                        {% if username==user or rol!='USUARIO' %}
-                        <i class="fas fa-pen edit-cont"></i>
-                        {% endif %}
-                    </div>
-                </div>
-                <div>
-                    <strong>País: </strong>
-                    <div>
-                        <input type="text" name="pais" id="pais" class="input-edit-cont" value="{{dataUser['pais']}}" disabled>
-                        {% if username==user or rol!='USUARIO' %}
-                        <i class="fas fa-pen edit-cont"></i>
-                        {% endif %}
-                    </div>
-                </div>
-                <div>
-                    <strong>Ciudad: </strong>
-                    <div>
-                        <input type="text" name="ciud" id="ciud" class="input-edit-cont" value="{{dataUser['ciudad']}}" disabled>
-                        {% if username==user or rol!='USUARIO' %}
-                        <i class="fas fa-pen edit-cont"></i>
-                        {% endif %}
-                    </div>
-                </div>
-                <div>
-                    <strong>Teléfono: </strong>
-                    <div>
-                        <input type="number" name="tel" id="tel" class="input-edit-cont" value="{{dataUser['telefono']}}" disabled>
-                        {% if username==user or rol!='USUARIO' %}
-                        <i class="fas fa-pen edit-cont"></i>
-                        {% endif %}
-                    </div>
-                </div>
-                {% if username==user or rol!='USUARIO' %}
-                <div>
-                    <strong id="email-str">Correo: </strong>
-                    <div id="email-div">
-                        <input type="text" name="email" id="email" class="input-edit-cont" value="{{dataUser['email']}}" disabled>
-                        <i class="fas fa-pen edit-cont"></i>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
-            {% if username==user or rol!='USUARIO' %}
-            <button class="button-edit"><i class="fas fa-check-circle"></i></button>
-            {% endif %}
-        </form>
+        {% include 'layouts/user/userEdit.html' %}
         {% if username==user %}
-
         <div class="content-user">
             <div class="chats">
                 <div class="user-chats">

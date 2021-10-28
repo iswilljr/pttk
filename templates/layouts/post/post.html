@@ -1,0 +1,91 @@
+<div class="post" id="{{post[0]}}">
+    <div class="info">
+        <div class="foto">
+            <p>Foto</p>
+        </div>
+        <div class="desc">
+            <div class="user-date">
+                <p><strong><a href="/User/{{post[1]}}">{{post[1]}}</a></strong></p>
+                <p>{{post[2]}}</p>
+            </div>
+            {% if rol!="USUARIO" or user==post[1] %}
+            <div class="op-button">
+                <i class="fas fa-ellipsis-h"></i>
+                <div class="op-menu">
+                    <p><a href="/Post/Edit/{{post[1]}}/{{post[0]}}">Editar publicación</a></p>
+                    <p><a href="/Post/Delete/{{post[1]}}/{{post[0]}}" class="btn-dlt-pst">Eliminar publicación</a></p>
+                </div>
+            </div>
+            {% endif %}
+            
+        </div>
+    </div>
+    <div class="mensaje">
+        <div class="msg">
+            {% set mensage = post[3].split('\n') %}
+            {% for msg in mensage %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% if post[4]!='None' %}
+        <div class="imagen">
+            <div class="img-post"><img src="/{{post[4]}}" alt=""></div>
+        </div>
+    {% endif %}
+    
+    <div class="comentarios">
+        <div class="comt-msgs">
+            {% if dataComt %}
+            {% for comt in dataComt %}
+                {% if comt[1]==post[0] %}
+                <div class="comt-msg">
+                    {% if user==comt[2] or user==post[1] or rol!='USUARIO' %}
+                    <div class="cont-etdt-comt">
+                        {% if user==comt[2] or rol!='USUARIO' %}
+                        <button class="action-btn-comt edit-comt">
+                            <i class='bx bxs-message-edit'></i>
+                        </button>
+                        {% endif %}
+                        <button class="action-btn-comt delt-comt">
+                            <a href="/Post/Comentario/Delete/{{comt[0]}}">
+                                <i class='bx bxs-message-x'></i>
+                            </a>
+                        </button>
+                    </div>
+                    {% endif %}
+                    <p><strong><a href="/User/{{comt[2]}}">{{comt[2]}}</a></strong></p>
+                    <p class="comt-post" style="margin-left: 5px;">{{comt[3]}}</p>
+                    {% if user==comt[2] or user==post[1] or rol!='USUARIO' %}
+                    <form action="/Post/Comentario/Edit" method="post" class="txta-comt" style="display: none;">
+                        <input type="text" name="id_post" value="{{comt[1]}}" style="display: none;">
+                        <input type="text" name="id-comt-post" value="{{comt[0]}}" style="display: none;">
+                        <input type="text" name="post-comt-edit" maxlength="100" value="{{comt[3]}}">
+                        <button class="btn-can-comt">Cancelar</button>
+                        <input type="submit" value="Guardar">
+                    </form>
+                    {% endif %}
+                </div>
+                {% endif %}
+            {% endfor %}
+            {% else %}
+            Sin comentarios
+            {% endif %}
+            
+        </div>
+        <div class="comt-btn">
+            <form action="/Post/Comentario" method="POST">
+                <input type="text" name="id_post" id="id_post" value="{{post[0]}}" style="display: none;">
+                <input type="text" name="destino" id="destino" value="{{post[1]}}" style="display: none;">
+                <input type="text" name="comentario" class="post-comt" id="comentario" maxlength="100" spellcheck="false" autocomplete="off">
+                <label for="comentario-up"><i class='bx bx-send'></i></label>
+                <input type="submit" name="comentario-up" id="comentario-up" style="display: none;">
+            </form>
+            <div class="btn-comt">
+                <i class="fas fa-comment"></i>
+                <p><strong>Comentarios</a></strong></p>
+            </div>
+        </div>
+        
+    </div>
+</div>
