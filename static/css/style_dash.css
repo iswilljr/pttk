@@ -104,7 +104,7 @@
     overflow-y: auto;
 }
 
-.contenedor-dashboard .dash-content form{
+.contenedor-dashboard .dash-content .pr-form{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -114,7 +114,7 @@
     box-sizing: border-box;
 }
 
-.contenedor-dashboard .dash-content form input{
+.contenedor-dashboard .dash-content .pr-form input{
     height: 30px;
     outline: none;
     background: none;
@@ -122,17 +122,17 @@
     box-sizing: border-box;
 }
 
-.contenedor-dashboard .dash-content form input[type="search"]{
+.contenedor-dashboard .dash-content .pr-form input[type="search"]{
     border: none;
     border-bottom: 1px solid #00000d;
     width: 50%;
     padding: 0 5px;
 }
-.contenedor-dashboard .dash-content form input::-webkit-search-cancel-button{
+.contenedor-dashboard .dash-content .pr-form input::-webkit-search-cancel-button{
     display: none;
 }
 
-.contenedor-dashboard .dash-content form input[type="submit"]{
+.contenedor-dashboard .dash-content .pr-form input[type="submit"]{
     width: 70px;
     margin-left: 5px;
     border: 1px solid #00000d;
@@ -205,7 +205,7 @@
         min-height: calc(100% - 65px);
         background: #fff;
     }
-    .contenedor-dashboard .dash-content form input[type=text]{
+    .contenedor-dashboard .dash-content .pr-form input[type=text]{
         width: 75%;
     }
 }
@@ -334,6 +334,8 @@
 
 
 .busqueda i{
+    position: absolute;
+    right: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -342,17 +344,6 @@
     font-size: 25px;
 }
 
-.busqueda .s-content #comt-dash p{
-    background: none;
-}
-.busqueda .s-content #ver-post{
-    position: absolute;
-    top: 5px;
-    right: 10px;
-}
-.busqueda .s-content #ver-post a{
-    color: #00000d;
-}
 
 @media screen and (max-height:270px) {
     .contenedor-dashboard .dash-content .dash-content-item{
@@ -363,12 +354,12 @@
         height: auto;
     }
 }
-.comt-msg a{
+.comt-msg.comt a{
     text-decoration: none;
     color: #00000d;
 }
 
-.comt-msg{
+.comt-msg.comt{
     position: relative;
     display: flex;
     align-items: flex-start;
@@ -381,7 +372,7 @@
     box-sizing: border-box;
 }
 
-.comt-msg .foto{
+.comt-msg.comt .foto{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -392,14 +383,14 @@
     font-size: 20px;
 }
 
-.comt-msg .cont-etdt-comt{
+.comt-msg.comt .cont-etdt-comt{
     position: absolute;
     top: 0px;
     right: 10px;
     cursor: pointer;
 }
 
-.comt-msg .cont-etdt-comt button{
+.comt-msg.comt .cont-etdt-comt button{
     outline: none;
     width: 25px;
     height: 35px;
@@ -409,7 +400,7 @@
     cursor: pointer;
 }
 
-.comt-msg .content-comt{
+.comt-msg.comt .content-comt{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -420,22 +411,22 @@
     top: 25px;
 }
 
-.comt-msg .content-comt #user{
+.comt-msg.comt .content-comt #user{
     font-size: 20px;
 }
 
-.comt-msg .content-comt .comt-post{
+.comt-msg.comt .content-comt .comt-post{
     height: auto;
     font-size: 20px;
 }
 
-.comt-msg .content-comt .txta-comt{
+.comt-msg.comt .content-comt .txta-comt{
     width: 98%;
     height: 35px;
     border: none;
 }
 
-.comt-msg .content-comt .txta-comt input[type="text"]{
+.comt-msg.comt .content-comt .txta-comt input[type="text"]{
     outline: none;
     border: 1px solid #00000d;
     background: none;
@@ -445,8 +436,8 @@
     box-sizing: border-box;
 }
 
-.comt-msg .content-comt .txta-comt input[type="submit"],
-.comt-msg .content-comt .txta-comt button{
+.comt-msg.comt .content-comt .txta-comt input[type="submit"],
+.comt-msg.comt .content-comt .txta-comt button{
     width: 70px;
     height: 30px;
     border: 1px solid #00000d;

@@ -41,7 +41,7 @@
     </div>
     <div class="dash-content">
         {% if rol!='USUARIO' %}
-        <form action="" method="GET" id="dashConsulta" onsubmit="actionSelect()">
+        <form action="" class="pr-form" method="GET" id="dashConsulta" onsubmit="actionSelect()">
             <select class="select-dash" name="" id="" style="display: none;">
                 <option class="option-dash" value="post" selected="selected">post</option>
                 <option class="option-dash" value="comt">comt</option>
@@ -72,11 +72,10 @@
         <div class="dash-content-item">
             {% if dataComt %}
             {% for comt in dataComt %}
-            <div class="comt-msg">
+            <div class="comt-msg comt">
                 <div class="foto">
                     Foto
                 </div>
-                {% if user==comt[2] or rol!='USUARIO' %}
                 <div class="cont-etdt-comt">
                     {% if user==comt[2] or rol!='USUARIO' %}
                     <button class="action-btn-comt edit-comt">
@@ -89,20 +88,20 @@
                         </a>
                     </button>
                 </div>
-                {% endif %}
                 <div class="content-comt">
                     <p id="user"><strong><a href="/User/{{comt[2]}}">{{comt[2]}}</a></strong></p>
-                    <p class="comt-post" style="margin-left: 5px;">{{comt[3]}}</p>
+                    <p {% if user==comt[2] or rol!='USUARIO' %} class="comt-post editar-comt-post" {% else %} class="comt-post" {% endif %} style="margin-left: 5px;">{{comt[3]}}</p>
                     {% if user==comt[2] or rol!='USUARIO' %}
                     <form action="/Post/Comentario/Edit" method="post" class="txta-comt" style="display: none;">
-                        <input type="text" name="id_post" value="{{comt[1]}}" style="display: none;">
-                        <input type="text" name="id-comt-post" value="{{comt[0]}}" style="display: none;">
-                        <input type="text" name="post-comt-edit" maxlength="100" value="{{comt[3]}}">
+                        <input type="text" name="id_post" value="{{comt[1]}}" style="display: none;" spellcheck="false" autocomplete="off">
+                        <input type="text" name="id-comt-post" value="{{comt[0]}}" style="display: none;" spellcheck="false" autocomplete="off">
+                        <input type="text" name="post-comt-edit" maxlength="100" value="{{comt[3]}}" spellcheck="false" autocomplete="off">
                         <button class="btn-can-comt">Cancelar</button>
                         <input type="submit" value="Guardar">
                     </form>
+                    {% endif %}
                 </div>
-                {% endif %}
+                
             </div>
             {% endfor %}
             {% else %}

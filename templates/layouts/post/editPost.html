@@ -8,7 +8,7 @@
 
 {% block content_layout %}
 <form action="/Post/Edit/{{data[1]}}/{{data[0]}}" method="POST" enctype="multipart/form-data" class="cont-up">
-    <textarea name="text" id="text">{{data[3]}}</textarea>
+    <textarea name="text" id="text" spellcheck="false" autocomplete="off">{{data[3]}}</textarea>
     <div class="info">
         <img id="imgs"
         {% if data[4]=="None" %}

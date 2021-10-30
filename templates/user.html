@@ -22,12 +22,6 @@
             <li class="item-user select">
                 <p><i class="fas fa-user-edit"></i>Perfil</p>
             </li>
-            {% if username==user %}
-
-            <li class="item-user">
-                <p><i class="fas fa-comment-alt"></i>Ver mensajes</p>
-            </li>
-            {% endif %}
             <li class="item-user fotos">
                 <p>
                     <i class="fas fa-portrait"></i>
@@ -43,39 +37,6 @@
     <div class="contenido">
         {% include 'layouts/user/userEdit.html' %}
         {% if username==user %}
-        <div class="content-user">
-            <div class="chats">
-                <div class="user-chats">
-                    <div class="user-chat-n select">CHAT 1</div>
-                    <div class="user-chat-n">CHAT 2</div>
-                    <div class="user-chat-n">CHAT 3</div>
-                    <div class="user-chat-n">CHAT 4</div>
-                    <div class="user-chat-n">CHAT 5</div>
-                </div>
-                <div class="contenido-chats">
-                    <div class="cont-chat-n active">
-                        <i class="fas fa-arrow-left" id="back"></i>
-                        CHAT 1
-                    </div>
-                    <div class="cont-chat-n">
-                        <i class="fas fa-arrow-left" id="back"></i>
-                        CHAT 2
-                    </div>
-                    <div class="cont-chat-n">
-                        <i class="fas fa-arrow-left" id="back"></i>
-                        CHAT 3
-                    </div>
-                    <div class="cont-chat-n">
-                        <i class="fas fa-arrow-left" id="back"></i>
-                        CHAT 4
-                    </div>
-                    <div class="cont-chat-n">
-                        <i class="fas fa-arrow-left" id="back"></i>
-                        CHAT 5
-                    </div>
-                </div>
-            </div>
-        </div>
         {% endif %}
         <div class="content-user">
             <ul class="user-galery">

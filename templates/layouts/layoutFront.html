@@ -10,8 +10,25 @@
                     FOTO
                 </div>
                 <div class="perfil-desc">
-                    Descripción
+                    <strong>{{user}}</strong> 
                 </div>
+            </div>
+            <div class="notf-post">
+                {% if dataUserComt %}
+                    {% for comt in range(5) %}
+                        {% if dataUserComt[comt] %}
+                            {% if dataUserComt[comt][2]==user %}
+                            <p><a href="/Inicio#{{dataUserComt[comt][1]}}">Has comentado tu post</a></p>
+                            {% else %}
+                                <p><a href="#{{dataUserComt[comt][1]}}">{{dataUserComt[comt][2]}} ha comentado tu post</a></p>
+                            {% endif %}
+                            
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <p id="sin-cont"><a href="/Inicio">Sin contenido aún</a></p> 
+                {% endif %}
+                
             </div>
             <div class="perfil-opciones">
                 <a href="/User/{{user}}">Ir a mi perfil</a>

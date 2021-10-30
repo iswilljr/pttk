@@ -6,6 +6,7 @@
     background: #fff;
     border-radius: 15px;
     margin-bottom: 15px;
+    box-shadow: var(--box-shadow);
 }
 
 #no-results{

@@ -15,6 +15,7 @@
                 <p>¡Inicia sesión!</p>
             </div>
             <form action="/" method="POST">
+                {{ csrf_tpken }}
                 <input type="text" placeholder="Usuario" id="user" name="user" required>
                 <input type="password" placeholder="Contraseña" id="pass" name="pass" required>
                 <input type="submit" value="Iniciar sesión">

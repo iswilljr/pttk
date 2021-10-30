@@ -12,7 +12,7 @@
 {% if busqueda or posts %}
 
 {% for user in busqueda %}
-<div class="busqueda">
+<div class="busqueda s">
     <div class="foto">
         <p>Foto</p>
     </div>
@@ -28,6 +28,7 @@
 {% include 'layouts/post/post.html' %}
 {% endfor %}
 {% else %}
+<i class="fas fa-search" style="font-size: 100px;"></i>
 <p id="no-results">Sin resultados encontrados</p>
 {% endif %}
 

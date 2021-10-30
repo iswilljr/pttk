@@ -81,7 +81,7 @@ btnDeltComt.forEach(btn => {
 });
 let btnEditComt = document.querySelectorAll('.edit-comt')
 let postComt = document.querySelectorAll('.txta-comt')
-let comtArea = document.querySelectorAll('.comt-post')
+let comtArea = document.querySelectorAll('.editar-comt-post')
 for(let btn in btnEditComt){
     btnEditComt[btn].onclick = function(){
         postComt[btn].setAttribute('style','display: block;')
@@ -208,17 +208,37 @@ for (let i = 0; i < dash_items.length; i++) {
         }dash_items[i].className = "dash-item select";
         dash_conts[i].className = "dash-content-item active";
         if(i==0){
-            optionDash[0].setAttribute('selected', 'selected')
-            consulta.setAttribute('placeholder','Ingresa el id de un post para modificarlo')
+            if(optionDash[0]){
+                optionDash[0].setAttribute('selected', 'selected')
+            }
+            if(consulta){
+                consulta.setAttribute('placeholder','Ingresa el id de un post para modificarlo')
+            }
+            
         }else if(i==1){
-            optionDash[1].setAttribute('selected','selected')
-            consulta.setAttribute('placeholder','Ingresa el id de un post para modificarlo')
+            if(optionDash[1]){
+                optionDash[1].setAttribute('selected','selected')
+            }
+            if(consulta){
+                consulta.setAttribute('placeholder','Ingresa el id de un post para modificarlo')
+            }
+            
         }else if(i==2){
-            optionDash[2].setAttribute('selected','selected')
-            consulta.setAttribute('placeholder','Ingresa un usuario para ver y modificar su contenido')
+            if(optionDash[2]){
+                optionDash[2].setAttribute('selected','selected')
+            }
+            if(consulta){
+                consulta.setAttribute('placeholder','Ingresa un usuario para ver y modificar su contenido')
+            }
+            
         }else if(i==3){
-            optionDash[3].setAttribute('selected','selected')
-            consulta.setAttribute('placeholder','Ingresa un usuario para ver y modificar su contenido')
+            if(optionDash[3]){
+                optionDash[3].setAttribute('selected','selected')
+            }
+            if(consulta){
+                consulta.setAttribute('placeholder','Ingresa un usuario para ver y modificar su contenido')
+            }
+            
         }
     }
 }

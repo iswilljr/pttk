@@ -19,28 +19,45 @@
 {% endblock %}
 
 {% block comtEdit %}
-{% if dataUser=='None' %}
 <div class="dash-content-item">
-    Usuario no encontrado
-</div>
-{% else %}
-<div class="dash-content-item">
+    {% if dataComt %}
     {% for comt in dataComt %}
-    <div class="busqueda">
+    <div class="comt-msg comt">
         <div class="foto">
-            <p>Foto</p>
+            Foto
         </div>
-        <div class="s-content">
+        <div class="cont-etdt-comt">
+            {% if user==comt[2] or rol!='USUARIO' %}
+            <button class="action-btn-comt edit-comt">
+                <i class='bx bxs-message-edit'></i>
+            </button>
+            {% endif %}
+            <button class="action-btn-comt delt-comt">
+                <a href="/Post/Comentario/Delete/{{comt[0]}}">
+                    <i class='bx bxs-message-x'></i>
+                </a>
+            </button>
+        </div>
+        <div class="content-comt">
             <p id="user"><strong><a href="/User/{{comt[2]}}">{{comt[2]}}</a></strong></p>
-            <p id="ver-post"><strong>Post de {{comt[4]}}</strong> <a href="/Inicio#{{comt[1]}}">Ver post</a></p>
-            <div class="desc" id="comt-dash">
-                <p>{{comt[3]}}</p>
-            </div>
+            <p {% if user==comt[2] or rol!='USUARIO' %} class="comt-post editar-comt-post" {% else %} class="comt-post" {% endif %} style="margin-left: 5px;">{{comt[3]}}</p>
+            {% if user==comt[2] or rol!='USUARIO' %}
+            <form action="/Post/Comentario/Edit" method="post" class="txta-comt" style="display: none;">
+                <input type="text" name="id_post" value="{{comt[1]}}" style="display: none;" spellcheck="false" autocomplete="off">
+                <input type="text" name="id-comt-post" value="{{comt[0]}}" style="display: none;" spellcheck="false" autocomplete="off">
+                <input type="text" name="post-comt-edit" maxlength="100" value="{{comt[3]}}" spellcheck="false" autocomplete="off">
+                <button class="btn-can-comt">Cancelar</button>
+                <input type="submit" value="Guardar">
+            </form>
+            {% endif %}
         </div>
+        
     </div>
     {% endfor %}
+    {% else %}
+    Sin Comentarios
+    {% endif %}
 </div>
-{% endif %}
 {% endblock %}
 
 {% block userEdit %}
@@ -51,12 +68,13 @@
             <p>Foto</p>
         </div>
         <div class="s-content" id="cont-busq">
-            <p id="user"><strong>{{dataUser[0]}}</strong></p>
+            <p id="user"><strong><a href="/User/{{dataUser[0]}}">{{dataUser[0]}}</a></strong></p>
             <div class="desc">
                 <p>{{dataUser[1]}}</p>
                 <div></div>
             </div>
         </div>
+        <p style="position: absolute; top: 5px; right:5px;"><strong>ROL {{dataUser[2]}}</strong></p>
         <i class="fas fa-edit button-user-dash"></i>
         <div class="opciones-dash">
             <div><a href="/User/{{dataUser[0]}}">Editar usuario</a></div>
@@ -77,16 +95,17 @@
             <p>Foto</p>
         </div>
         <div class="s-content" id="cont-busq">
-            <p id="user"><strong>{{dataUser[0]}}</strong></p>
+            <p id="user"><strong><a href="/User/{{dataUser[0]}}">{{dataUser[0]}}</a></strong></p>
             <div class="desc">
                 <p>{{dataUser[1]}}</p>
                 <div></div>
             </div>
         </div>
+        <p style="position: absolute; top: 5px; right:5px;"><strong>ROL {{dataUser[2]}}</strong></p>
         <i class="fas fa-user-shield button-user-dash"></i>
         <div class="opciones-dash">
             <form action="/Dash/User/Rol/USUARIO" method="POST" id="formRol">
-                <input type="text" name="user" id="user" style="display: none;" value="{{dataUser[0]}}">
+                <input type="text" name="user" id="user" style="display: none;" value="{{dataUser[0]}}" spellcheck="false" autocomplete="off">
                 {% if dataUser[2]!='USUARIO' %}
                 <button class="button-form-rol" value="USUARIO" onclick="user()">Cambiar rol a usuario</button> 
                 {% endif %}

@@ -7,7 +7,7 @@
     </div>
     <div class="desc-user">
         <div>
-            <input type="text" name="desc" id="desc" class="input-edit-cont" maxlength="100" value="{{dataUser['descripcion']}}" disabled>
+            <input type="text" name="desc" id="desc" class="input-edit-cont" maxlength="100" value="{{dataUser['descripcion']}}" disabled spellcheck="false" autocomplete="off">
             {% if username==user or rol!='USUARIO' %}
             <i class="fas fa-pen edit-cont"></i>
             {% endif %}
@@ -17,7 +17,7 @@
         <div>
             <strong>Username: </strong>
             <div>
-                <input type="text" name="user" id="user" maxlength="15" class="input-edit-cont" value="{{dataUser['username']}}" disabled>
+                <input type="text" name="user" id="user" maxlength="15" class="input-edit-cont" value="{{dataUser['username']}}" disabled spellcheck="false" autocomplete="off">
                 {% if username==user or rol!='USUARIO' %}
                 <i class="fas fa-pen edit-cont"></i>
                 {% endif %}
@@ -26,7 +26,7 @@
         <div>
             <strong>País: </strong>
             <div>
-                <input type="text" name="pais" id="pais" maxlength="20" class="input-edit-cont" value="{{dataUser['pais']}}" disabled>
+                <input type="text" name="pais" id="pais" maxlength="20" class="input-edit-cont" value="{{dataUser['pais']}}" disabled spellcheck="false" autocomplete="off">
                 {% if username==user or rol!='USUARIO' %}
                 <i class="fas fa-pen edit-cont"></i>
                 {% endif %}
@@ -35,7 +35,7 @@
         <div>
             <strong>Ciudad: </strong>
             <div>
-                <input type="text" name="ciud" id="ciud" max="20" class="input-edit-cont" value="{{dataUser['ciudad']}}" disabled>
+                <input type="text" name="ciud" id="ciud" max="20" class="input-edit-cont" value="{{dataUser['ciudad']}}" disabled spellcheck="false" autocomplete="off">
                 {% if username==user or rol!='USUARIO' %}
                 <i class="fas fa-pen edit-cont"></i>
                 {% endif %}
@@ -54,7 +54,7 @@
         <div>
             <strong id="email-str">Correo: </strong>
             <div id="email-div">
-                <input type="text" name="email" id="email" class="input-edit-cont" value="{{dataUser['email']}}" disabled>
+                <input type="text" name="email" id="email" class="input-edit-cont" value="{{dataUser['email']}}" disabled spellcheck="false" autocomplete="off">
                 <i class="fas fa-pen edit-cont"></i>
             </div>
         </div>

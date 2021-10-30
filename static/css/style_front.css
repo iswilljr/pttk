@@ -407,38 +407,46 @@
     object-fit: cover;
 }
 
+.busqueda.s{
+    width: 70%;
+}
 
 @media screen and (min-width:1400px) {
     .post,
-    .cont-up{
+    .cont-up,
+    .busqueda.s{
         width: 450px;
     }
 }
 
 @media screen and (max-width:970px) {
     .post,
-    .cont-up{
+    .cont-up,
+    .busqueda.s{
         width: 80%;
     }
 }
 
 @media screen and (max-width:870px) {
     .post,
-    .cont-up{
+    .cont-up,
+    .busqueda.s{
         width: 90%;
     }
 }
 
 @media screen and (max-width:770px) {
     .post,
-    .cont-up{
+    .cont-up,
+    .busqueda.s{
         width: 95%;
     }
 }
 
 @media screen and (max-width:650px) {
     .post,
-    .cont-up{
+    .cont-up,
+    .busqueda.s{
         width: 90%;
     }
 }

@@ -15,6 +15,7 @@
                 <p>¡Registrate!</p>
             </div>
             <form action="/Signup" method="POST">
+                {{ csrf_tpken }}
                 <input type="email" placeholder="Email" name="email" id="email" required>
                 <input type="text" placeholder="Usuario" name="user" id="user" maxlength="15"  required>
                 <input type="password" placeholder="Contraseña" name="pass" id="pass" required>

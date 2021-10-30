@@ -71,7 +71,8 @@ def Home():
                 cur = db.cursor()
                 dataPost=cur.execute("SELECT * FROM Posts ORDER BY id desc").fetchall()
                 dataComt=cur.execute("SELECT * FROM Comentarios").fetchall()
-            return render_template('front.html',user=session['user'],rol=session['rol'],dataPost=dataPost,dataComt=dataComt)
+                dataUserComt=cur.execute("SELECT * FROM Comentarios WHERE destino = ? ORDER BY id_comt desc",[session['user']]).fetchall()
+            return render_template('front.html',user=session['user'],rol=session['rol'],dataPost=dataPost,dataComt=dataComt,dataUserComt=dataUserComt)
         except Error:
             print(Error)
     else:
@@ -84,7 +85,9 @@ def Post():
             message=str(escape(request.form['text']))
             file=request.files['fileImg']
             if file.filename!='':
+                img0=f"/home/pttk/mysite/static/img/{secure_filename(file.filename)}"
                 img=f"static/img/{secure_filename(file.filename)}"
+                file.save(img0)
             else:
                 img='None'
             fecha=str(datetime.today()).split(" ")
@@ -164,29 +167,31 @@ def EditDelete(user,id):
         try:
             with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                 cur = db.cursor()
-                if request.path==f'/Post/Edit/{user}/{id}' and (session['rol']!='USUARIO' or user==session['user']):
-                    if request.method=='POST':
-                        message=str(escape(request.form['text']))
-                        file=request.files['fileImg']
-                        fecha=str(datetime.today()).split(" ")
-                        if file.filename!='':
-                            img=f"static/img/{file.filename}"
-                            file.save(img)
-                            cur.execute("UPDATE Posts SET mensaje=?, imagen=?, fecha=? WHERE id = ?",(message,img,fecha[0],id))
-                        else:
-                            img=cur.execute("SELECT imagen FROM Posts WHERE id = ?",[id]).fetchone()
-                            cur.execute("UPDATE Posts SET mensaje=?, imagen=?, fecha=? WHERE id = ?",(message,img[0],fecha[0],id))
-                        flash("Post actualizado")
+                id_ex=cur.execute("SELECT id FROM posts WHERE id = ?",[id]).fetchone()
+                if id_ex:
+                    if request.path==f'/Post/Edit/{user}/{id}' and (session['rol']!='USUARIO' or user==session['user']):
+                        if request.method=='POST':
+                            message=str(escape(request.form['text']))
+                            file=request.files['fileImg']
+                            fecha=str(datetime.today()).split(" ")
+                            if file.filename!='':
+                                img0=f"/home/pttk/mysite/static/img/{secure_filename(file.filename)}"
+                                img=f"static/img/{secure_filename(file.filename)}"
+                                file.save(img0)
+                                cur.execute("UPDATE Posts SET mensaje=?, imagen=?, fecha=? WHERE id = ?",(message,img,fecha[0],id))
+                            else:
+                                img=cur.execute("SELECT imagen FROM Posts WHERE id = ?",[id]).fetchone()
+                                cur.execute("UPDATE Posts SET mensaje=?, imagen=?, fecha=? WHERE id = ?",(message,img[0],fecha[0],id))
+                            flash("Post actualizado")
+                            return redirect(session['rdct'])
+                        data=cur.execute("SELECT * FROM Posts WHERE id = ?",[id]).fetchone()
+                        return render_template('layouts/post/editPost.html',data=data)
+                    elif request.path==f'/Post/Delete/{user}/{id}' and (session['rol']!='USUARIO' or user==session['user']):
+                        cur.execute("DELETE FROM Posts WHERE id = ?",[id])
+                        cur.execute("DELETE FROM Comentarios WHERE id_post = ?",[id])
+                        flash("Post eliminiado")
                         return redirect(session['rdct'])
-                    data=cur.execute("SELECT * FROM Posts WHERE id = ?",[id]).fetchone()
-                    return render_template('layouts/post/editPost.html',data=data)
-                elif request.path==f'/Post/Delete/{user}/{id}' and (session['rol']!='USUARIO' or user==session['user']):
-                    cur.execute("DELETE FROM Posts WHERE id = ?",[id])
-                    cur.execute("DELETE FROM Comentarios WHERE id_post = ?",[id])
-                    flash("Post eliminiado")
-                    return redirect(session['rdct'])
-                else:
-                    return redirect('/Inicio')
+                return redirect(session['rdct'])
         except Error:
             print(Error)
     else:
@@ -230,6 +235,8 @@ def ProfileEdit(username):
                                 flash("Usuario en uso")
                             else:
                                 cur.execute("UPDATE Posts SET username = ? WHERE username = ?",(user,username))
+                                cur.execute("UPDATE Comentarios SET username = ? WHERE username = ?",(user,username))
+                                cur.execute("UPDATE Comentarios SET destino = ? WHERE destino = ?",(user,username))
                         cur.execute("UPDATE Sesiones SET email=?,username=?,descripcion=?,pais=?,ciudad=?,telefono=? WHERE username=?",(email,user,desc,pais,ciud,tel,username))
                         flash("Perfil actualizado")   
                         if username==session['user']:
@@ -269,7 +276,7 @@ def Dash():
             with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                 cur = db.cursor()
                 dataPost=cur.execute("SELECT * FROM Posts WHERE username = ? ORDER BY id desc",[session['user']]).fetchall()
-                dataComt=cur.execute("SELECT * FROM Comentarios WHERE destino = ? or username = ?",(session['user'],session['user'])).fetchall()
+                dataComt=cur.execute("SELECT * FROM Comentarios WHERE destino = ? or username = ? ORDER BY id_comt desc",(session['user'],session['user'])).fetchall()
         except Error:
             print(Error)
         return render_template('dash.html',user=session['user'],rol=session['rol'],dataPost=dataPost,dataComt=dataComt)
@@ -284,11 +291,12 @@ def DashPost():
             if consulta is None:
                 pass
             else:
+                session['rdct']=f'/Dash/Post?consulta={consulta}'
                 try:
                     with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                         cur = db.cursor()
                         dataPost=cur.execute("SELECT * FROM Posts WHERE id = ?",[consulta]).fetchone()
-                        dataComt=cur.execute("SELECT * FROM Comentarios WHERE id_post = ?",[consulta]).fetchall()
+                        dataComt=cur.execute("SELECT * FROM Comentarios WHERE id_post = ? ORDER BY id_comt desc",[consulta]).fetchall()
                         if dataPost==None:
                             dataPost='None'
                         try:
@@ -309,13 +317,14 @@ def DashUser():
         if consulta=="":
             pass
         else:
+            session['rdct']=f'/Dash/User?consulta={consulta}'
             if consulta!=session['user'] and session['rol']!='USUARIO':
                 try:
                     with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                         cur = db.cursor()
                         dataUser=cur.execute("SELECT username,descripcion,rol FROM Sesiones WHERE username = ?",[consulta]).fetchone()
                         dataPost=cur.execute("SELECT * FROM Posts WHERE username = ? ORDER BY id desc",[consulta]).fetchall()
-                        dataComt=cur.execute("SELECT * FROM Comentarios WHERE username = ?",[consulta]).fetchall()
+                        dataComt=cur.execute("SELECT * FROM Comentarios WHERE username = ? ORDER BY id_comt desc",[consulta]).fetchall()
                         if not dataPost:
                             dataPost='None'
                         if dataUser==None:
@@ -339,7 +348,7 @@ def ProfileRol(rol):
                             cur= db.cursor()
                             cur.execute("UPDATE Sesiones SET rol = ? WHERE username = ?",(rol,usuario))
                             flash("Rol cambiado con éxito")
-                            return redirect('/Dash')
+                            return redirect(session['rdct'])
                     except Error:
                         print(Error)
         return redirect('/Dash')
@@ -351,22 +360,22 @@ def ProfileRol(rol):
 def Search():
     if 'user' in session:
         consulta=request.args.get('search')
-        consulta= consulta + "%"
-        consulta2= "%" + consulta
         if consulta is None or consulta=="":
-            busqueda="None"
+            flash('Consulta invalida')
+            return redirect(session['rdct'])
         else:
+            consulta= consulta + "%"
+            consulta2= "%" + consulta
             try:
                 with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                     cur = db.cursor()
                     busqueda=cur.execute("SELECT username,descripcion FROM Sesiones WHERE username LIKE ?",[consulta]).fetchall()
                     posts=cur.execute("SELECT * FROM Posts WHERE mensaje LIKE ? ORDER BY id desc",[consulta2]).fetchall()
                     dataComt=cur.execute("SELECT * FROM Comentarios").fetchall()
-                    print(posts)
-                    print(dataComt)
+                    dataUserComt=cur.execute("SELECT * FROM Comentarios WHERE destino = ? ORDER BY id_comt desc",[session['user']]).fetchall()
             except Error:
                 print(Error)
-        return render_template('search.html',user=session['user'],rol=session['rol'],busqueda=busqueda,posts=posts,dataComt=dataComt)
+        return render_template('search.html',user=session['user'],rol=session['rol'],busqueda=busqueda,posts=posts,dataComt=dataComt,dataUserComt=dataUserComt)
     else:
         return redirect('/')
 
