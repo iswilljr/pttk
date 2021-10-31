@@ -11,7 +11,7 @@ def Login():
         user=escape(request.form['user'])
         pw=escape(request.form['pass'])
         try:
-            with sqlite3.connect('database.db') as db:
+            with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                 cur = db.cursor()
                 data=cur.execute("SELECT clave, rol FROM Sesiones WHERE username = ?",[user]).fetchone()
                 if not data is None:
@@ -48,7 +48,7 @@ def Signup():
             flash('Contraseña invalido')
             return redirect('/Signup')
         try:
-            with sqlite3.connect('database.db') as db:
+            with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                 cur = db.cursor()
                 userUse=cur.execute("SELECT username FROM Sesiones WHERE username = ?",[user]).fetchone()
                 if userUse is None:
@@ -67,7 +67,7 @@ def Home():
     if 'user' in session:
         session['rdct']="/Inicio"
         try:
-            with sqlite3.connect('database.db') as db:
+            with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                 cur = db.cursor()
                 dataPost=cur.execute("SELECT * FROM Posts ORDER BY id desc").fetchall()
                 dataComt=cur.execute("SELECT * FROM Comentarios").fetchall()
@@ -86,7 +86,7 @@ def Post():
             message=str(escape(request.form['text']))
             file=request.files['fileImg']
             if file.filename!='':
-                img0=f"static/img/imgPosts/{secure_filename(file.filename)}"
+                img0=f"/home/pttk/mysite/static/img/imgPosts/{secure_filename(file.filename)}"
                 img=f"static/img/imgPosts/{secure_filename(file.filename)}"
                 file.save(img0)
             else:
@@ -94,7 +94,7 @@ def Post():
             fecha=str(datetime.today()).split(" ")
             user=session['user']
             try:
-                with sqlite3.connect('database.db') as db:
+                with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                     cur = db.cursor()
                     perfil=cur.execute("SELECT perfil FROM Sesiones WHERE username = ?",[session['user']]).fetchone()
                     cur.execute("INSERT INTO Posts(username,fecha,mensaje,imagen,perfil) VALUES(?,?,?,?,?)",(user,fecha[0],message,img,perfil[0]))
@@ -114,7 +114,7 @@ def PostComt():
             username=escape(session['user'])
             comentario=escape(request.form['comentario'])
             try:
-                with sqlite3.connect('database.db') as db:
+                with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                     cur = db.cursor()
                     cur.execute("INSERT INTO Comentarios(id_post,username,comentario,destino)VALUES(?,?,?,?)",(id_post,username,comentario,destino))
                     flash("Mensaje comentado")
@@ -133,7 +133,7 @@ def PostComEdit():
             id_comt=int(escape(request.form['id-comt-post']))
             comentario=escape(request.form['post-comt-edit'])
             try:
-                with sqlite3.connect('database.db') as db:
+                with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                     cur = db.cursor()
                     cur.execute("UPDATE Comentarios SET comentario = ? WHERE id_comt = ?",(comentario,id_comt))
                     flash("Comentario actualizado")
@@ -148,7 +148,7 @@ def PostComEdit():
 def PostComtDelt(id):
     if 'user' in session:
         try:
-            with sqlite3.connect('database.db') as db:
+            with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                 cur = db.cursor()
                 comp=cur.execute("SELECT username,destino FROM Comentarios WHERE id_comt = ?",[id]).fetchone()
                 if session['user']==comp[0] or session['user']==comp[1] or session['rol']!='USUARIO':
@@ -167,7 +167,7 @@ def EditDelete(user,id):
     global rdrct
     if 'user' in session:
         try:
-            with sqlite3.connect('database.db') as db:
+            with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                 cur = db.cursor()
                 id_ex=cur.execute("SELECT id FROM posts WHERE id = ?",[id]).fetchone()
                 if id_ex:
@@ -177,7 +177,7 @@ def EditDelete(user,id):
                             file=request.files['fileImg']
                             fecha=str(datetime.today()).split(" ")
                             if file.filename!='':
-                                img0=f"static/img/imgPosts/{secure_filename(file.filename)}"
+                                img0=f"/home/pttk/mysite/static/img/imgPosts/{secure_filename(file.filename)}"
                                 img=f"static/img/imgPosts/{secure_filename(file.filename)}"
                                 file.save(img0)
                                 cur.execute("UPDATE Posts SET mensaje=?, imagen=?, fecha=? WHERE id = ?",(message,img,fecha[0],id))
@@ -205,7 +205,7 @@ def EditDelete(user,id):
 def Profile(username):
     if 'user' in session:
         try:
-            with sqlite3.connect('database.db') as db:
+            with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                 db.row_factory=sqlite3.Row
                 cur = db.cursor()
                 dataUser=cur.execute("SELECT perfil,username,email,pais,ciudad,telefono,descripcion FROM Sesiones WHERE username = ?",[username]).fetchone()
@@ -233,11 +233,11 @@ def ProfileEdit(username):
                 if perfil.filename=="":
                     perfil="static/img/UserProfiles/default.jpg"
                 else:
-                    img0=f"static/img/UserProfiles/{secure_filename(perfil.filename)}"
+                    img0=f"/home/pttk/mysite/static/img/UserProfiles/{secure_filename(perfil.filename)}"
                     img=f"static/img/UserProfiles/{secure_filename(perfil.filename)}"
                     perfil.save(img0)
                 try:
-                    with sqlite3.connect('database.db') as db:
+                    with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                         cur = db.cursor()
                         if user!=username:
                             userUse=cur.execute("SELECT username FROM Sesiones WHERE username = ?",[user]).fetchone()
@@ -266,7 +266,7 @@ def ProfileDelete(username):
     if 'user' in session:
         if session['rol']!='USUARIO':
             try:
-                with sqlite3.connect('database.db') as db:
+                with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                     cur= db.cursor()
                     cur.execute("DELETE FROM Comentarios WHERE username = ?",[username])
                     cur.execute("DELETE FROM Posts WHERE username = ?",[username])
@@ -285,7 +285,7 @@ def Dash():
     if 'user' in session:
         session['rdct']="/Dash"
         try:
-            with sqlite3.connect('database.db') as db:
+            with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                 cur = db.cursor()
                 dataPost=cur.execute("SELECT * FROM Posts WHERE username = ? ORDER BY id desc",[session['user']]).fetchall()
                 dataComt=cur.execute("SELECT * FROM Comentarios WHERE destino = ? or username = ? ORDER BY id_comt desc",(session['user'],session['user'])).fetchall()
@@ -305,7 +305,7 @@ def DashPost():
             else:
                 session['rdct']=f'/Dash/Post?consulta={consulta}'
                 try:
-                    with sqlite3.connect('database.db') as db:
+                    with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                         cur = db.cursor()
                         dataPost=cur.execute("SELECT * FROM Posts WHERE id = ?",[consulta]).fetchone()
                         dataComt=cur.execute("SELECT * FROM Comentarios WHERE id_post = ? ORDER BY id_comt desc",[consulta]).fetchall()
@@ -332,7 +332,7 @@ def DashUser():
             session['rdct']=f'/Dash/User?consulta={consulta}'
             if consulta!=session['user'] and session['rol']!='USUARIO':
                 try:
-                    with sqlite3.connect('database.db') as db:
+                    with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                         cur = db.cursor()
                         dataUser=cur.execute("SELECT username,descripcion,rol,perfil FROM Sesiones WHERE username = ?",[consulta]).fetchone()
                         dataPost=cur.execute("SELECT * FROM Posts WHERE username = ? ORDER BY id desc",[consulta]).fetchall()
@@ -356,7 +356,7 @@ def ProfileRol(rol):
             if session['rol']=='SUPERADMINISTRADOR':
                 if rol=='USUARIO' or rol=='ADMINISTRADOR' or rol=='SUPERADMINISTRADOR':
                     try:
-                        with sqlite3.connect('database.db') as db:
+                        with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                             cur= db.cursor()
                             cur.execute("UPDATE Sesiones SET rol = ? WHERE username = ?",(rol,usuario))
                             flash("Rol cambiado con éxito")
@@ -379,7 +379,7 @@ def Search():
             consulta= consulta + "%"
             consulta2= "%" + consulta
             try:
-                with sqlite3.connect('database.db') as db:
+                with sqlite3.connect('/home/pttk/mysite/database.db') as db:
                     cur = db.cursor()
                     busqueda=cur.execute("SELECT username,descripcion,perfil FROM Sesiones WHERE username LIKE ?",[consulta]).fetchall()
                     posts=cur.execute("SELECT * FROM Posts WHERE mensaje LIKE ? ORDER BY id desc",[consulta2]).fetchall()
