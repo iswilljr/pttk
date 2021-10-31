@@ -18,14 +18,9 @@
         <label for="fileImg" class="subir" id="buttonFile">
             <i class='bx bxs-image-add'></i>
         </label>
-        <input id="fileImg" name="fileImg" multiple
+        <input id="fileImg" name="fileImg"
             accept=".png, .jpeg, .jpg, .bmp, .ico, .svg, .webp, .gif, .psd, .heic, .nef, .crw, .ai, .id"
-            onchange='file_img()' type="file" />
-        <label for="fileVid" class="subir" style="display: none;">
-            <i class='bx bxs-video'></i>
-        </label>
-        <input id="fileVid" name="fileVid" multiple accept=".avi, .mp4, .divx,.mov, ,mpg, .mkv, .wmv, .wpl, .webm"
-            onchange='file_vid()' type="file" />
+            onchange='file_img("fileImg")' type="file" />
         <input type="submit" value="Publicar">
     </div>
 </form>

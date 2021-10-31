@@ -18,9 +18,6 @@
     {% if dataComt %}
     {% for comt in dataComt %}
     <div class="comt-msg comt">
-        <div class="foto">
-            Foto
-        </div>
         <div class="cont-etdt-comt">
             {% if user==comt[2] or rol!='USUARIO' %}
             <button class="action-btn-comt edit-comt">

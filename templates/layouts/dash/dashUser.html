@@ -23,9 +23,6 @@
     {% if dataComt %}
     {% for comt in dataComt %}
     <div class="comt-msg comt">
-        <div class="foto">
-            Foto
-        </div>
         <div class="cont-etdt-comt">
             {% if user==comt[2] or rol!='USUARIO' %}
             <button class="action-btn-comt edit-comt">
@@ -65,7 +62,7 @@
     {% if dataUser!='None' %}
     <div class="busqueda">
         <div class="foto">
-            <p>Foto</p>
+            <img src="/{{dataUser[3]}}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 100px;">
         </div>
         <div class="s-content" id="cont-busq">
             <p id="user"><strong><a href="/User/{{dataUser[0]}}">{{dataUser[0]}}</a></strong></p>
@@ -92,7 +89,7 @@
     {% if dataUser!='None' %}
     <div class="busqueda">
         <div class="foto">
-            <p>Foto</p>
+            <img src="/{{dataUser[3]}}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 100px;">
         </div>
         <div class="s-content" id="cont-busq">
             <p id="user"><strong><a href="/User/{{dataUser[0]}}">{{dataUser[0]}}</a></strong></p>

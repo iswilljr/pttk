@@ -28,9 +28,17 @@
     height: 65px;
     border-radius: 50px;
     margin-right: 10px;
-    background: var(--color-normal);
     user-select: none;
 }
+
+.post .info .foto img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50px;
+    border: 1px solid #00000d;
+}
+
 
 .post .info .desc{
     display: flex;

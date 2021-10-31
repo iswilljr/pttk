@@ -24,35 +24,22 @@ for (let i = 0; i < opc.length; i++) {
     }
 }
 
-function file_img() {
-    var archivo = document.getElementById("fileImg").files[0];
+function file_img(fileClass) {
+    var archivo = document.getElementById(fileClass).files[0];
     var reader = new FileReader();
-    if (fileImg) {
+    if (fileClass) {
         reader.readAsDataURL(archivo);
         reader.onloadend = function () {
             document.getElementById("imgs").className = "img active"
-            document.getElementById("vids").className = "vid"
             document.getElementById("imgs").src = reader.result;
-        }
-    }
-}
-function file_vid() {
-    var archivo = document.getElementById("fileVid").files[0];
-    var reader = new FileReader();
-    if (fileVid) {
-        reader.readAsDataURL(archivo);
-        reader.onloadend = function () {
-            document.getElementById("vids").className = "vid active"
-            document.getElementById("imgs").className = "img"
-            document.getElementById("vids").src = reader.result;
         }
     }
 }
 
 let btnsPost = document.querySelectorAll('.btn-dlt-pst')
 btnsPost.forEach(btn => {
-    btn.onclick = e=>{
-        if(!confirm('Seguro que quiere eliminar el post?')){
+    btn.onclick = e => {
+        if (!confirm('Seguro que quiere eliminar el post?')) {
             e.preventDefault()
             opcs.forEach(opc => {
                 opc.className = "op-menu"
@@ -64,8 +51,8 @@ btnsPost.forEach(btn => {
 let formComt = document.querySelectorAll('.comt-btn')
 let btnComt = document.querySelectorAll('.btn-comt')
 let Comt = document.querySelectorAll('.comt-msgs')
-for(let btn in btnComt){
-    btnComt[btn].onclick = function(){
+for (let btn in btnComt) {
+    btnComt[btn].onclick = function () {
         Comt[btn].classList.toggle('active')
         formComt[btn].classList.toggle('active')
     }
@@ -73,8 +60,8 @@ for(let btn in btnComt){
 
 let btnDeltComt = document.querySelectorAll('.delt-comt')
 btnDeltComt.forEach(btn => {
-    btn.onclick = e=>{
-        if(!confirm('¿Está seguro de eliminar del comentario?')){
+    btn.onclick = e => {
+        if (!confirm('¿Está seguro de eliminar del comentario?')) {
             e.preventDefault()
         }
     }
@@ -82,12 +69,12 @@ btnDeltComt.forEach(btn => {
 let btnEditComt = document.querySelectorAll('.edit-comt')
 let postComt = document.querySelectorAll('.txta-comt')
 let comtArea = document.querySelectorAll('.editar-comt-post')
-for(let btn in btnEditComt){
-    btnEditComt[btn].onclick = function(){
-        postComt[btn].setAttribute('style','display: block;')
-        comtArea[btn].setAttribute('style','display: none;')
+for (let btn in btnEditComt) {
+    btnEditComt[btn].onclick = function () {
+        postComt[btn].setAttribute('style', 'display: block;')
+        comtArea[btn].setAttribute('style', 'display: none;')
         btnEditComt.forEach(btn => {
-            btn.setAttribute('style','display: none;')
+            btn.setAttribute('style', 'display: none;')
         });
     }
 }
@@ -95,14 +82,14 @@ for(let btn in btnEditComt){
 let btnCantEditComt = document.querySelectorAll('.btn-can-comt')
 
 
-for(let i in btnCantEditComt){
-    btnCantEditComt[i].onclick = e=>{
+for (let i in btnCantEditComt) {
+    btnCantEditComt[i].onclick = e => {
         e.preventDefault()
         btnEditComt.forEach(btn => {
-            btn.setAttribute('style','display: inline;')
+            btn.setAttribute('style', 'display: inline;')
         });
-        postComt[i].setAttribute('style','display: none;')
-        comtArea[i].setAttribute('style','display: block;')
+        postComt[i].setAttribute('style', 'display: none;')
+        comtArea[i].setAttribute('style', 'display: block;')
     }
 }
 
@@ -160,21 +147,21 @@ for (let i = 0; i < chats.length; i++) {
 let buttonEdit = document.querySelectorAll('.edit-cont')
 let inputEdit = document.querySelectorAll('.input-edit-cont')
 for (let i = 0; i < buttonEdit.length; i++) {
-    let btn = buttonEdit[i];
-    let ipt = inputEdit[i];
     let btnEdit = document.querySelector('.button-edit');
-    btn.onclick = function () {
+    buttonEdit[i].onclick = function () {
         btnEdit.className = 'button-edit active'
-        let atr = ipt.getAttributeNames()
-        for (let j = 0; j < atr.length; j++) {
-            if (atr[j] == 'disabled') {
-                ipt.removeAttribute('disabled')
-            } else {
-                ipt.setAttribute('disabled', 'disabled')
+        if (i != 0) {
+            let atr = inputEdit[i - 1].getAttributeNames()
+            console.log("1")
+            for (let j = 0; j < atr.length; j++) {
+                if (atr[j] == 'disabled') {
+                    inputEdit[i - 1].removeAttribute('disabled')
+                    console.log("2")
+                } else {
+                    inputEdit[i - 1].setAttribute('disabled', 'disabled')
+                }
             }
-
         }
-
     }
 }
 
@@ -205,51 +192,51 @@ for (let i = 0; i < dash_items.length; i++) {
             dash_conts[j].className = "dash-content-item";
 
             j++;
-        }dash_items[i].className = "dash-item select";
+        } dash_items[i].className = "dash-item select";
         dash_conts[i].className = "dash-content-item active";
-        if(i==0){
-            if(optionDash[0]){
+        if (i == 0) {
+            if (optionDash[0]) {
                 optionDash[0].setAttribute('selected', 'selected')
             }
-            if(consulta){
-                consulta.setAttribute('placeholder','Ingresa el id de un post para modificarlo')
+            if (consulta) {
+                consulta.setAttribute('placeholder', 'Ingresa el id de un post para modificarlo')
             }
-            
-        }else if(i==1){
-            if(optionDash[1]){
-                optionDash[1].setAttribute('selected','selected')
+
+        } else if (i == 1) {
+            if (optionDash[1]) {
+                optionDash[1].setAttribute('selected', 'selected')
             }
-            if(consulta){
-                consulta.setAttribute('placeholder','Ingresa el id de un post para modificarlo')
+            if (consulta) {
+                consulta.setAttribute('placeholder', 'Ingresa el id de un post para modificarlo')
             }
-            
-        }else if(i==2){
-            if(optionDash[2]){
-                optionDash[2].setAttribute('selected','selected')
+
+        } else if (i == 2) {
+            if (optionDash[2]) {
+                optionDash[2].setAttribute('selected', 'selected')
             }
-            if(consulta){
-                consulta.setAttribute('placeholder','Ingresa un usuario para ver y modificar su contenido')
+            if (consulta) {
+                consulta.setAttribute('placeholder', 'Ingresa un usuario para ver y modificar su contenido')
             }
-            
-        }else if(i==3){
-            if(optionDash[3]){
-                optionDash[3].setAttribute('selected','selected')
+
+        } else if (i == 3) {
+            if (optionDash[3]) {
+                optionDash[3].setAttribute('selected', 'selected')
             }
-            if(consulta){
-                consulta.setAttribute('placeholder','Ingresa un usuario para ver y modificar su contenido')
+            if (consulta) {
+                consulta.setAttribute('placeholder', 'Ingresa un usuario para ver y modificar su contenido')
             }
-            
+
         }
     }
 }
 
-function actionSelect(){
+function actionSelect() {
     let selectDash = document.querySelector('.select-dash')
     let dashConsulta = document.getElementById('dashConsulta')
-    if(selectDash.value=='post' || selectDash.value=='comt'){
-        dashConsulta.action='/Dash/Post'
-    }else if(selectDash.value=='user' || selectDash.value=='asig'){
-        dashConsulta.action='/Dash/User'
+    if (selectDash.value == 'post' || selectDash.value == 'comt') {
+        dashConsulta.action = '/Dash/Post'
+    } else if (selectDash.value == 'user' || selectDash.value == 'asig') {
+        dashConsulta.action = '/Dash/User'
     }
 }
 
@@ -257,26 +244,26 @@ let buttonUserDash = document.querySelectorAll('.button-user-dash')
 let contUserDash = document.querySelectorAll('.opciones-dash')
 for (let i = 0; i < buttonUserDash.length; i++) {
     let btn = buttonUserDash[i];
-    btn.onclick = function(){
+    btn.onclick = function () {
         contUserDash[i].classList.toggle('active')
     }
-    
+
 }
 
 let formRol = document.getElementById('formRol')
-function user(){
-    formRol.action="/Dash/User/Rol/USUARIO"
+function user() {
+    formRol.action = "/Dash/User/Rol/USUARIO"
 }
-function admin(){
-    formRol.action="/Dash/User/Rol/ADMINISTRADOR"
+function admin() {
+    formRol.action = "/Dash/User/Rol/ADMINISTRADOR"
 }
-function superadmin(){
-    formRol.action="/Dash/User/Rol/SUPERADMINISTRADOR"
+function superadmin() {
+    formRol.action = "/Dash/User/Rol/SUPERADMINISTRADOR"
 }
 // dashboard end
 
 
-function flash(){
+function flash() {
     let flashMenu = document.querySelector('.alert');
     flashMenu.className = "alert desactive";
 }

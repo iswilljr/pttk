@@ -1,13 +1,18 @@
-<form class="content-user active" action="/User/{{username}}/Edit" method="POST" onsubmit="habilitar()">
+<form class="content-user active" action="/User/{{username}}/Edit" enctype="multipart/form-data" method="POST" onsubmit="habilitar()"> 
     <div class="foto-user">
-        FOTO
+        <img src="/{{dataUser['perfil']}}" id="imgs" class="img">
         {% if username==user %}
-        <i class="fas fa-pen"></i>
+        <label for="proFile" class="edit-cont">
+            <i class="fas fa-pen"></i>
+            <input id="proFile" name="proFile"
+            accept=".png, .jpeg, .jpg, .bmp, .ico, .svg, .webp, .gif, .psd, .heic, .nef, .crw, .ai, .id"
+            onchange='file_img("proFile")' type="file" style="display: none;" />
+        </label>
         {% endif %}
     </div>
     <div class="desc-user">
         <div>
-            <input type="text" name="desc" id="desc" class="input-edit-cont" maxlength="100" value="{{dataUser['descripcion']}}" disabled spellcheck="false" autocomplete="off">
+            <input type="text" name="desc" id="desc" class="input-edit-cont" maxlength="100" value="{{dataUser['descripcion']}}" spellcheck="false" autocomplete="off" disabled="disabled">
             {% if username==user or rol!='USUARIO' %}
             <i class="fas fa-pen edit-cont"></i>
             {% endif %}
@@ -17,7 +22,7 @@
         <div>
             <strong>Username: </strong>
             <div>
-                <input type="text" name="user" id="user" maxlength="15" class="input-edit-cont" value="{{dataUser['username']}}" disabled spellcheck="false" autocomplete="off">
+                <input type="text" name="user" id="user" maxlength="15" class="input-edit-cont" value="{{dataUser['username']}}" spellcheck="false" autocomplete="off" disabled="disabled">
                 {% if username==user or rol!='USUARIO' %}
                 <i class="fas fa-pen edit-cont"></i>
                 {% endif %}
@@ -26,7 +31,7 @@
         <div>
             <strong>País: </strong>
             <div>
-                <input type="text" name="pais" id="pais" maxlength="20" class="input-edit-cont" value="{{dataUser['pais']}}" disabled spellcheck="false" autocomplete="off">
+                <input type="text" name="pais" id="pais" maxlength="20" class="input-edit-cont" value="{{dataUser['pais']}}" spellcheck="false" autocomplete="off" disabled="disabled">
                 {% if username==user or rol!='USUARIO' %}
                 <i class="fas fa-pen edit-cont"></i>
                 {% endif %}
@@ -35,7 +40,7 @@
         <div>
             <strong>Ciudad: </strong>
             <div>
-                <input type="text" name="ciud" id="ciud" max="20" class="input-edit-cont" value="{{dataUser['ciudad']}}" disabled spellcheck="false" autocomplete="off">
+                <input type="text" name="ciud" id="ciud" max="20" class="input-edit-cont" value="{{dataUser['ciudad']}}" spellcheck="false" autocomplete="off" disabled="disabled">
                 {% if username==user or rol!='USUARIO' %}
                 <i class="fas fa-pen edit-cont"></i>
                 {% endif %}
@@ -44,7 +49,7 @@
         <div>
             <strong>Teléfono: </strong>
             <div>
-                <input type="number" name="tel" id="tel" maxlength="15" class="input-edit-cont" value="{{dataUser['telefono']}}" disabled>
+                <input type="number" name="tel" id="tel" maxlength="15" class="input-edit-cont" value="{{dataUser['telefono']}}" disabled="disabled">
                 {% if username==user or rol!='USUARIO' %}
                 <i class="fas fa-pen edit-cont"></i>
                 {% endif %}
@@ -54,7 +59,7 @@
         <div>
             <strong id="email-str">Correo: </strong>
             <div id="email-div">
-                <input type="text" name="email" id="email" class="input-edit-cont" value="{{dataUser['email']}}" disabled spellcheck="false" autocomplete="off">
+                <input type="text" name="email" id="email" class="input-edit-cont" value="{{dataUser['email']}}" spellcheck="false" autocomplete="off" disabled="disabled">
                 <i class="fas fa-pen edit-cont"></i>
             </div>
         </div>
